@@ -22,29 +22,38 @@ public class Role implements GrantedAuthority {
     @Id
     @Column(name = "role_id")
     @GeneratedValue
-    private int role_id;
+    private Long roleId;
 
     @Column(name = "role_name")
-    private String role_name;
+    private String roleName;
 
     @Transient
     @ManyToMany(mappedBy = "role")
     private Set<User> users;
 
-    public int getRole_id() {
-        return role_id;
+    public Role(Long roleId) {
+        this.roleId = roleId;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public Role(Long roleId, String roleName) {
+        this.roleId = roleId;
+        this.roleName = roleName;
+    }
+
+    public Long getRole_id() {
+        return roleId;
+    }
+
+    public void setRole_id(Long role_id) {
+        this.roleId = role_id;
     }
 
     public String getRole_name() {
-        return role_name;
+        return roleName;
     }
 
     public void setRole_name(String role_name) {
-        this.role_name = role_name;
+        this.roleName = role_name;
     }
 
     public Set<User> getUsers() {

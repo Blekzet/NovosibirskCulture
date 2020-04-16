@@ -8,61 +8,61 @@ public class Affiche {
     @Id
     @Column(name = "affiche_id")
     @GeneratedValue
-    private int affiche_id;
+    private Long afficheId;
 
     @Column(name = "affiche_name")
-    private String affiche_name;
+    private String afficheName;
 
     @Column(name = "affiche_descriprion")
-    private String affiche_descriprion;
+    private String afficheDescriprion;
 
     @Column(name = "rating")
-    private int rating;
+    private Long rating;
 
     @Column(name = "comment_id")
-    private int comment_id;
+    private Long  commentId;
 
     @Column(name = "picture")
     private String picture;
 
-    public int getAffiche_id() {
-        return affiche_id;
+    public Long getAffiche_id() {
+        return afficheId;
     }
 
-    public void setAffiche_id(int affiche_id) {
-        this.affiche_id = affiche_id;
+    public void setAffiche_id(Long affiche_id) {
+        this.afficheId = affiche_id;
     }
 
     public String getAffiche_name() {
-        return affiche_name;
+        return afficheName;
     }
 
     public void setAffiche_name(String affiche_name) {
-        this.affiche_name = affiche_name;
+        this.afficheName = affiche_name;
     }
 
     public String getAffiche_descriprion() {
-        return affiche_descriprion;
+        return afficheDescriprion;
     }
 
     public void setAffiche_descriprion(String affiche_descriprion) {
-        this.affiche_descriprion = affiche_descriprion;
+        this.afficheDescriprion = affiche_descriprion;
     }
 
-    public int getRating() {
+    public Long getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Long rating) {
         this.rating = rating;
     }
 
-    public int getComment_id() {
-        return comment_id;
+    public Long getComment_id() {
+        return afficheId;
     }
 
-    public void setComment_id(int comment_id) {
-        this.comment_id = comment_id;
+    public void setComment_id(Long comment_id) {
+        this.commentId = comment_id;
     }
 
     public String getPicture() {

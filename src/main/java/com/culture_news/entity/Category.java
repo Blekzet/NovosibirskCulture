@@ -10,7 +10,7 @@ public class Category {
     @Id
     @Column(name = "category_id")
     @GeneratedValue
-    private int category_id;
+    private Long categoryId;
 
     @Column(name = "name")
     private String name;
@@ -20,26 +20,26 @@ public class Category {
 
     @Transient
     @ManyToMany(mappedBy = "category")
-    private Set<News> news_category;
+    private Set<News> newsCategory;
     
     
     public Category() {
     }
 
     public Set<News> getNews_category() {
-        return news_category;
+        return newsCategory;
     }
 
     public void setNews_category(Set<News> news_category) {
-        this.news_category = news_category;
+        this.newsCategory = news_category;
     }
 
-    public int getCategory_id() {
-        return category_id;
+    public Long getCategory_id() {
+        return categoryId;
     }
 
-    public void setCategory_id(int category_id) {
-        this.category_id = category_id;
+    public void setCategory_id(Long category_id) {
+        this.categoryId = category_id;
     }
 
     public String getName() {

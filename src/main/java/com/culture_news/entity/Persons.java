@@ -10,13 +10,13 @@ public class Persons {
     @Id
     @Column(name = "person_id")
     @GeneratedValue
-    private int person_id;
+    private Long personId;
     @Column(name = "person_name")
-    private String person_name;
+    private String personName;
     @Column(name = "occupation")
     private String occupation;
     @Column(name = "born_date")
-    private Date born_date;
+    private Date bornDate;
     @Column(name = "description")
     private String description;
     @Column(name = "photo")
@@ -26,20 +26,20 @@ public class Persons {
 
     }
 
-    public int getPerson_id() {
-        return person_id;
+    public Long getPerson_id() {
+        return personId;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public void setPerson_id(Long person_id) {
+        this.personId = person_id;
     }
 
     public String getPerson_name() {
-        return person_name;
+        return personName;
     }
 
     public void setPerson_name(String person_name) {
-        this.person_name = person_name;
+        this.personName = person_name;
     }
 
     public String getOccupation() {
@@ -51,11 +51,11 @@ public class Persons {
     }
 
     public Date getBorn_date() {
-        return born_date;
+        return bornDate;
     }
 
     public void setBorn_date(Date born_date) {
-        this.born_date = born_date;
+        this.bornDate = born_date;
     }
 
     public String getDescription() {

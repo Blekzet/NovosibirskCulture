@@ -8,15 +8,15 @@ public class Place {
     @Id
     @Column(name = "place_id")
     @GeneratedValue
-    private int place_id;
+    private Long placeId;
     @Column(name = "place_name")
-    private String place_name;
+    private String placeName;
     @Column(name = "site")
     private String site;
     @Column(name = "address")
     private String address;
     @Column(name = "phone_number")
-    private String phone_number;
+    private String phoneNumber;
     @Column(name = "email")
     private String email;
     @Column(name = "description")
@@ -27,20 +27,20 @@ public class Place {
     public Place() {
     }
 
-    public int getPlace_id() {
-        return place_id;
+    public Long getPlace_id() {
+        return placeId;
     }
 
-    public void setPlace_id(int place_id) {
-        this.place_id = place_id;
+    public void setPlace_id(Long place_id) {
+        this.placeId = place_id;
     }
 
     public String getPlace_name() {
-        return place_name;
+        return placeName;
     }
 
     public void setPlace_name(String place_name) {
-        this.place_name = place_name;
+        this.placeName = place_name;
     }
 
     public String getSite() {
@@ -60,11 +60,11 @@ public class Place {
     }
 
     public String getPhone_number() {
-        return phone_number;
+        return phoneNumber;
     }
 
     public void setPhone_number(String phone_number) {
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
 
     public String getEmail() {

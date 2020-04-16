@@ -17,12 +17,13 @@ public class ThymeleafConf {
     public SpringResourceTemplateResolver templateResolver(){
 
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
-        templateResolver.setApplicationContext(this.applicationContext);
-        templateResolver.setPrefix("/resources/templates/");
+        templateResolver.setApplicationContext(applicationContext);
+        templateResolver.setPrefix("..resources/templates/**");
         templateResolver.setSuffix(".html");
-        templateResolver.setTemplateMode("XHTML");
+        templateResolver.setTemplateMode("HTML");
         return templateResolver;
     }
+    
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();

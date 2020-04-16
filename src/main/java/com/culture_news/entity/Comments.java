@@ -14,34 +14,34 @@ public class Comments {
     @Id
     @Column(name = "comment_id")
     @GeneratedValue
-    private int comment_id;
+    private Long commentId;
 
     @Column(name = "user_id")
-    private int user_id;
+    private Long userId;
 
     @Column(name = "text")
     private String text;
 
     @Column(name = "rating")
-    private int rating;
+    private Long rating;
 
     public Comments() {
     }
 
-    public int getComment_id() {
-        return comment_id;
+    public Long getComment_id() {
+        return commentId;
     }
 
-    public void setComment_id(int comment_id) {
-        this.comment_id = comment_id;
+    public void setComment_id(Long comment_id) {
+        this.commentId = comment_id;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Long getUser_id() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser_id(Long user_id) {
+        this.userId = user_id;
     }
 
     public String getText() {
@@ -52,11 +52,11 @@ public class Comments {
         this.text = text;
     }
 
-    public int getRating() {
+    public Long getRating() {
         return rating;
     }
 
-    public void setRating(int rating) {
+    public void setRating(Long rating) {
         this.rating = rating;
     }
     

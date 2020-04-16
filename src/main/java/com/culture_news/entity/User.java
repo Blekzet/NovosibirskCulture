@@ -9,6 +9,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
 import java.util.Collection;
 import java.util.Set;
 
@@ -19,22 +20,24 @@ public class User implements UserDetails{
     @Id
     @Column(name = "user_id")
     @GeneratedValue
-    private int user_id;
+    private Long userId;
 
     @Column(name = "first_name")
-    private String first_name;
+    private String firstName;
 
     @Column(name = "last_name")
-    private String last_name;
+    private String lastName;
 
-    @Column(name = "user_name", unique = true, nullable = false)
-    private String user_name;
+    @NotEmpty
+    @Column(name = "user_name")
+    private String userName;
 
-    @Column(name = "email", unique = true, nullable = false)
+    @Column(name = "email")
     private String email;
 
-    @Column(name = "password_hash", nullable = false)
-    private String password_hash;
+    @NotEmpty
+    @Column(name = "password_hash")
+    private String password;
 
     @Column(name = "avatar")
     private String avatar;
@@ -46,32 +49,32 @@ public class User implements UserDetails{
     public User() {
     }
 
-    public int getUser_id() {
-        return user_id;
+    public Long getUser_id() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setUser_id(Long user_id) {
+        this.userId = user_id;
     }
 
     public String getFirst_name() {
-        return first_name;
+        return firstName;
     }
 
     public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+        this.firstName = first_name;
     }
 
     public String getLast_name() {
-        return last_name;
+        return lastName;
     }
 
     public void setLast_name(String last_name) {
-        this.last_name = last_name;
+        this.lastName = last_name;
     }
 
     public void setUser_name(String user_name) {
-        this.user_name = user_name;
+        this.userName = user_name;
     }
 
     public String getEmail() {
@@ -83,11 +86,11 @@ public class User implements UserDetails{
     }
 
     public String getPassword_hash() {
-        return password_hash;
+        return password;
     }
 
     public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
+        this.password = password_hash;
     }
 
     public String getAvatar() {
@@ -110,7 +113,7 @@ public class User implements UserDetails{
 
     @Override
     public String getUsername() {
-        return user_name;
+        return userName;
     }
 
     @Override
