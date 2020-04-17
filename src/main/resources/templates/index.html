@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>Культура Новосибирска</title>
+    <link type = "text/css" rel = "stylesheet" href = "../static/styles.css">
+    <link type = "text/css" rel = "stylesheet" href = "../static/pgwslider.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body class="center-block">
+<header>
+    <div class="head-container ">
+        <a class="logo text-decoration-none" href="">
+            <h1>Культура <k>Новосибирска</k></h1>
+        </a>
+    </div>
+</header>
+
+<nav class="topnav-main navbar navbar-expand-lg sticky-top navbar-light navbar-toggleable navbar-expand-md py-0" style="background-color: #c6e1c0;">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="#navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand " href="#">КН</a>
+
+    <div class="topnav collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item py-0">
+                <a class="nav-link active" href="#">Главная</a>
+            </li>
+            <li class="nav-item py-0">
+                <a class="nav-link" href="#">Музыка</a>
+            </li>
+            <li class="nav-item py-0">
+                <a class="nav-link" href="#">Музеи</a>
+            </li>
+            <li class="nav-item py-0">
+                <a class="nav-link" href="#">Кино</a>
+            </li>
+            <li class="nav-item py-0">
+                <a class="nav-link" href="#">Театры</a>
+            </li>
+            <li class="nav-item py-0">
+                <a class="nav-link" href="#">Персоны</a>
+            </li>
+            <li class="nav-item py-0">
+                <a class="nav-link" href="#">Достопримечательности</a>
+            </li>
+
+        </ul>
+        <form class="form-inline my-2 my-lg 0" sec:authorize="!isAuthenticated()">
+            <a class="nav-link" href="/registration">Вход</a>
+        </form>
+        <form class="form-inline my-2 my-lg 0" sec:authorize="isAuthenticated()">
+            <a class="nav-link" href="/registration">Выход</a>
+        </form>
+    </div>
+</nav>
+
+
+
+<div class="container">
+    <div class="hot_news">
+        <ul class="pgwSlider">
+            <li><img src="https://sun4-17.userapi.com/pABwofipwkAguLYlEXq9lmFEmYSw9xWgA09Sxw/KwYLvfFcYNY.jpg" alt="Заголовок новости 1" data-description="Краткий текст новости 1"></li>
+            <li><img src="https://sun4-17.userapi.com/pABwofipwkAguLYlEXq9lmFEmYSw9xWgA09Sxw/KwYLvfFcYNY.jpg" alt="Заголовок новости 2" data-description="Краткий текст новости 2"></li>
+            <li><img src="https://sun4-17.userapi.com/pABwofipwkAguLYlEXq9lmFEmYSw9xWgA09Sxw/KwYLvfFcYNY.jpg" alt="Заголовок новости 3" data-description="Краткий текст новости 3"></li>
+         </ul>
+        <script src="../static/pgwslider.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('.pgwSlider').pgwSlider(
+                    {maxHeight : 300, transitionEffect: 'sliding'}
+                 );
+            });
+        </script>
+    </div>
+
+
+     <aside>
+         <div  class="sidebar">
+             <h1 class="sidebar-title">Поиск</h1>
+             <div class="search-input-form">
+                <input class=" form-control mr-sm-2" type="search" placeholder="Поиск по сайту" aria-label="Search">
+                <button class=" btn btn-outline-success my-2 my-sm-0" type="submit">Найти</button>
+             </div>
+         </div>
+                 <div class ="sidebar">
+
+                     <h1 class="sidebar-title">Последние новости</h1>
+
+
+                     <ul class = "last-news-list">
+                         <li>
+                             <a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" width="150" > </a>
+                             <a href="" class="post-title"> Название новости</a>
+                             <p class="post-desc"> Краткое описание новости</p>
+
+                         </li>
+                         <li>
+                             <a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" width="150" > </a>
+                             <a href="" class="post-title"> Название новости</a>
+                             <p class="post-desc"> Краткое описание новости</p>
+
+                         </li>
+                         <li>
+                             <a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" width="150" > </a>
+                             <a href="" class="post-title"> Название новости</a>
+                             <p class="post-desc"> Краткое описание новости</p>
+
+                         </li>
+                         <li>
+                             <a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" width="150" > </a>
+                             <a href="" class="post-title"> Название новости</a>
+                             <p class="post-desc"> Краткое описание новости</p>
+
+                         </li>
+                         <li>
+                             <a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" width="150" > </a>
+                             <a href="" class="post-title"> Название новости</a>
+                             <p class="post-desc"> Краткое описание новости</p>
+
+                         </li>
+                     </ul>
+                 </div>
+                 <div class="sidebar">
+                     <h1 class="sidebar-title">Подписка на рассылку</h1>
+                     <form action="" method="post" id="subscribe">
+                         <div class="mail-sender-form">
+                             <input type="email" class="form-control" id="InputEmail" aria-describedby="emailHelp" placeholder="Введите Email">
+                             <button type="submit" class="btn btn-outline-success my-2 my-sm-0 ">Подписаться</button>
+                         </div>
+                     </form>
+                 </div>
+
+             </aside>
+
+
+             <div class="news-container">
+                 <div class="select-block">
+
+                     <h1 href="" class="select-title"> Выбор рубрики</h1>
+                     <button type="submit" class="btn btn-outline-success my-2 my-sm-0 category-btn">Применить</button>
+                     <div class="category">
+                         <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                             <option selected>Все категории</option>
+                             <option value="1">Кино</option>
+                             <option value="2">Музыка</option>
+                             <option value="3">Театры</option>
+                             <option value="4">Музеи</option>
+                         </select>
+                     </div>
+
+                 </div>
+                     <ul class="news-block">
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                         <li><a href=""> <img src="https://retina.news.mail.ru/pic/79/93/image733029_6ce40f1608b43a0d33a642f8a3074794.jpg" ></a><p></p>
+                             <a href="" class="post-title"> <h1> Название новости </h1></a>
+                             <p class="post-desc"> Краткое описание новости</p>
+                         </li>
+                     </ul>
+             </div>
+         <nav class="page-panel" >
+             <ul class="pagination">
+                 <li class="page-item disabled">
+                     <a class="page-link" href="#" tabindex="-1">Previous</a>
+                 </li>
+                 <li class="page-item"><a class="page-link" href="#">1</a></li>
+                 <li class="page-item"><a class="page-link" href="#">2</a></li>
+                 <li class="page-item"><a class="page-link" href="#">3</a></li>
+                 <li class="page-item">
+                     <a class="page-link" href="#">Next</a>
+                 </li>
+             </ul>
+         </nav>
+
+     </div>
+
+
+     </body>
+     <footer>
+         <div class="container">
+             <div class="footer-col"><span>Культурный портал Новосибирска © 2020</span></div>
+             <div class="footer-col">
+                 <div class="social-bar-wrap">
+                     <a title="Facebook" href="" target="_blank"><i class="fa fa-facebook"></i></a>
+                     <a title="Twitter" href="" target="_blank"><i class="fa fa-twitter"></i></a>
+                     <a title="Pinterest" href="" target="_blank"><i class="fa fa-pinterest"></i></a>
+                     <a title="Instagram" href="" target="_blank"><i class="fa fa-instagram"></i></a>
+                 </div>
+             </div>
+             <div class="footer-col">
+                 <a href="mailto:admin@yoursite.ru">Написать письмо</a>
+             </div>
+         </div>
+     </footer>
+     </html>
