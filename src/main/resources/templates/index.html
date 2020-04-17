@@ -1,5 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
     <meta charset="UTF-8">
     <title>Культура Новосибирска</title>
@@ -54,10 +57,10 @@
 
         </ul>
         <form class="form-inline my-2 my-lg 0" sec:authorize="!isAuthenticated()">
-            <a class="nav-link" href="/registration">Вход</a>
+            <a class="nav-link" href="/login">Вход</a>
         </form>
         <form class="form-inline my-2 my-lg 0" sec:authorize="isAuthenticated()">
-            <a class="nav-link" href="/registration">Выход</a>
+            <a class="nav-link" href="/registrationForm">Выход</a>
         </form>
     </div>
 </nav>

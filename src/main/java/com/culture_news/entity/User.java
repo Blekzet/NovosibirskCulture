@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class User implements UserDetails{
 
     @Id
     @Column(name = "user_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     @Column(name = "first_name")
@@ -28,6 +29,7 @@ public class User implements UserDetails{
     @Column(name = "last_name")
     private String lastName;
 
+    @NotNull
     @NotEmpty
     @Column(name = "user_name")
     private String userName;
@@ -35,6 +37,7 @@ public class User implements UserDetails{
     @Column(name = "email")
     private String email;
 
+    @NotNull
     @NotEmpty
     @Column(name = "password_hash")
     private String password;

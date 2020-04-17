@@ -1,13 +1,18 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Регистрация</title>
 </head>
 <body>
 <div class="sidebar">
 
-    <form action="#" th:action="@{/registration}" th:object="${user}" method="POST">
+    <form action="#" th:action="@{/registration}" th:object="${userForm}" method="POST">
         <div>
             <label>Имя пользователя</label>
             <input type="text" placeholder="Username" th:field="*{username}"/>
