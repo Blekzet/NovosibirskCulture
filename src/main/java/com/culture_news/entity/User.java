@@ -5,14 +5,14 @@
  */
 package com.culture_news.entity;
 
+import com.culture_news.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
@@ -45,39 +45,41 @@ public class User implements UserDetails{
     @Column(name = "avatar")
     private String avatar;
 
-    @Transient
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> roles;
 
-    public User() {
-    }
+    private String passwordConfirm;
 
-    public Long getUser_id() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.userId = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public String getFirst_name() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.firstName = first_name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getLast_name() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.lastName = last_name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setUser_name(String user_name) {
-        this.userName = user_name;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getEmail() {
@@ -88,12 +90,8 @@ public class User implements UserDetails{
         this.email = email;
     }
 
-    public String getPassword_hash() {
-        return password;
-    }
-
-    public void setPassword_hash(String password_hash) {
-        this.password = password_hash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getAvatar() {
@@ -104,6 +102,14 @@ public class User implements UserDetails{
         this.avatar = avatar;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
@@ -111,7 +117,7 @@ public class User implements UserDetails{
 
     @Override
     public String getPassword() {
-        return getPassword_hash();
+        return password;
     }
 
     @Override
@@ -139,13 +145,11 @@ public class User implements UserDetails{
         return true;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getPasswordConfirm() {
+        return passwordConfirm;
     }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
+    public void setPasswordConfirm(String passwordConfirm) {
+        this.passwordConfirm = passwordConfirm;
     }
-    
-    
 }

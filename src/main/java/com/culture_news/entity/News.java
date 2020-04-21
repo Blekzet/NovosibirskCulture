@@ -15,7 +15,7 @@ public class News {
 
     @Id
     @Column(name = "news_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long newsId;
 
     @Column(name = "title")
@@ -31,10 +31,7 @@ public class News {
     private Long commentsCount;
 
     @Column(name = "date")
-    private Date date;
-
-    @Column(name = "rating")
-    private Long rating;
+    private String date;
 
     @Column(name = "comment_id")
     private Long commentId;
@@ -42,27 +39,18 @@ public class News {
     @Column(name = "picture")
     private String picture;
 
-    @Transient
-    @ManyToMany(mappedBy = "news")
+    @ManyToMany(fetch = FetchType.EAGER)
     private Set<Category> newsCategory;
 
     public News() {
     }
 
-    public Set<Category> getNews_category() {
-        return newsCategory;
-    }
-
-    public void setNews_category(Set<Category> news_category) {
-        this.newsCategory = news_category;
-    }
-    
-    public Long getNews_id() {
+    public Long getNewsId() {
         return newsId;
     }
 
-    public void setNews_id(Long news_id) {
-        this.newsId = news_id;
+    public void setNewsId(Long newsId) {
+        this.newsId = newsId;
     }
 
     public String getTitle() {
@@ -73,52 +61,44 @@ public class News {
         this.title = title;
     }
 
-    public String getShort_description() {
+    public String getShortDescription() {
         return shortDescription;
     }
 
-    public void setShort_description(String short_description) {
-        this.shortDescription = short_description;
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 
-    public String getFull_description() {
+    public String getFullDescription() {
         return fullDescription;
     }
 
-    public void setFull_description(String full_description) {
-        this.fullDescription = full_description;
+    public void setFullDescription(String fullDescription) {
+        this.fullDescription = fullDescription;
     }
 
-    public Long getComments_count() {
+    public Long getCommentsCount() {
         return commentsCount;
     }
 
-    public void setComments_count(Long comments_count) {
-        this.commentsCount = comments_count;
+    public void setCommentsCount(Long commentsCount) {
+        this.commentsCount = commentsCount;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Long getRating() {
-        return rating;
-    }
-
-    public void setRating(Long rating) {
-        this.rating = rating;
-    }
-
-    public Long getComment_id() {
+    public Long getCommentId() {
         return commentId;
     }
 
-    public void setComment_id(Long comment_id) {
-        this.commentId = comment_id;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     public String getPicture() {
@@ -128,6 +108,12 @@ public class News {
     public void setPicture(String picture) {
         this.picture = picture;
     }
-    
-    
+
+    public Set<Category> getNewsCategory() {
+        return newsCategory;
+    }
+
+    public void setNewsCategory(Set<Category> newsCategory) {
+        this.newsCategory = newsCategory;
+    }
 }

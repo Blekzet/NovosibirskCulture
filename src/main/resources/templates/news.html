@@ -1,56 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
     <meta charset="UTF-8">
     <title>Культура Новосибирска</title>
-    <link type = "text/css" rel = "stylesheet" href = "../static/styles.css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link type="text/css" href="../static/css/pgwslider.css" th:href="@{/css/pgwslider.css}" rel="stylesheet"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="../static/js/pgwslider.js" th:src="@{/js/pgwslider.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 </head>
-<body>
-<header>
-    <div class="head-container">
-        <a class="logo" href="">
-            <h1>Культура <k>Новосибирска</k></h1>
-        </a>
-        <div class="menu">
-            <ul class="ui-menu">
-                <li><a href=""> Главная</a></li>
-                <li><a href=""> Музыка</a></li>
-                <li><a href=""> Музеи</a></li>
-                <li><a href=""> Кино</a></li>
-                <li><a href=""> Театры</a></li>
-                <li><a href=""> Персоны</a></li>
-                <li><a href=""> Достопримечательности</a></li>
-            </ul>
-        </div>
-    </div>
+<body class="center-block">
+<header th:replace="fragments/header">
 </header>
 
+<nav th:replace="fragments/menu">
+</nav>
 
-<div class="main">
-    <div class="content-wrapper">
-        <h1>Название статьи</h1>
-        <div class="post-meta">
-                <span class="post-date">
-                    Дата публикации
-                </span>
-            <a href="" class="comment-counter">
-                Количество комментариев
-            </a>
-        </div>
-        <div class="content-inner">
-            <img src="">
-            Наполнение
-        </div>
-        <div class="post-share">
-            <h4>Поделиться</h4>
 
+<div class="container">
+    <aside th:replace="fragments/aside:: sidebar(sidebarData=${sidebarData})"> </aside>
+
+    <div class="news-container" th:object="${news}">
+        <h1 class="news-title" th:text="${news.title}">Название новости</h1>
+        <div class="news-meta">
+            <div>
+                Дата публикации:<span class="news-date news-meta-child" th:text="${news.date}">Дата публикации</span>
+            </div>
+            <div>
+                Категория:<span class="news-category news-meta-child"  th:each = "categories:${news.newsCategory}" th:text="${categories.name}">Категория</span>
+            </div>
+            <div>
+                Коментарии:<a href="" class="comment-counter news-meta-child" th:text="${news.commentsCount}">Количество комментариев</a>
+            </div>
         </div>
+        <div class="news-inner">
+            <img class="news-img" th:src = "@{${news.picture}}">
+
+            <p class="news-text" th:text="${news.fullDescription}">
+                текст новости
+            </p>
+        </div>
+
+        <div class="comments-container">
+            <label class="comments-title">Комментарии: </label>
+            <ul class="comments-wrapper">
+                <li class="comments-elem">
+                <label> <a href="">Пользователь</a></label>
+                    <p>Коментарий пользователя</p>
+                </li>
+                <li class="comments-elem">
+                    <label> <a href="">Пользователь</a></label>
+                    <p>Коментарий пользователя</p>
+                </li>
+                <li class="comments-elem">
+                    <label> <a href="">Пользователь</a></label>
+                    <p>Коментарий пользователя</p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="comment-form" sec:authorize="isAuthenticated()" >
+            <form th:action="@{'/comment/news/' + ${news.newsId}}" th:object="${comment}"  method="post">
+                    <label>Ваш комметарий:</label>
+                    <textarea id="description" name="text" class="text" placeholder="Введите текст комментария" cols="110" rows="10"> </textarea>
+                    <button type="submit" class="btn btn-outline-success my-2 my-sm-0 category-btn">Применить</button>
+            </form>
+        </div>
+
     </div>
 </div>
 
 
-<footer>
-</footer>
+
 </body>
+<footer th:replace="fragments/footer">
+</footer>
 </html>

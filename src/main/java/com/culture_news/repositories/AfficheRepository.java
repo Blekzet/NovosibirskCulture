@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AfficheRepository extends JpaRepository<Affiche, Long> {
+    public Affiche findByAfficheName(String afficheName);
 }

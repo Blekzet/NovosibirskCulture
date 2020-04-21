@@ -8,38 +8,26 @@ import java.util.Set;
 @Table(name = "category")
 public class Category {
     @Id
-    @Column(name = "category_id")
-    @GeneratedValue
     private Long categoryId;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "description")
     private String description;
 
     @Transient
     @ManyToMany(mappedBy = "category")
     private Set<News> newsCategory;
-    
+
     
     public Category() {
     }
 
-    public Set<News> getNews_category() {
-        return newsCategory;
-    }
-
-    public void setNews_category(Set<News> news_category) {
-        this.newsCategory = news_category;
-    }
-
-    public Long getCategory_id() {
+    public Long getCategoryId() {
         return categoryId;
     }
 
-    public void setCategory_id(Long category_id) {
-        this.categoryId = category_id;
+    public void setCategoryId(Long categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getName() {
@@ -49,6 +37,10 @@ public class Category {
     public void setName(String name) {
         this.name = name;
     }
+    public Category setStartName(String name){
+        this.name = name;
+        return this;
+    }
 
     public String getDescription() {
         return description;
@@ -57,6 +49,13 @@ public class Category {
     public void setDescription(String description) {
         this.description = description;
     }
-    
-    
+
+    public Set<News> getNewsCategory() {
+        return newsCategory;
+    }
+
+    public void setNewsCategory(Set<News> newsCategory) {
+        this.newsCategory = newsCategory;
+    }
+
 }

@@ -1,13 +1,14 @@
 package com.culture_news.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "affiche", schema = "public")
 public class Affiche {
     @Id
     @Column(name = "affiche_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long afficheId;
 
     @Column(name = "affiche_name")
@@ -16,53 +17,46 @@ public class Affiche {
     @Column(name = "affiche_descriprion")
     private String afficheDescriprion;
 
-    @Column(name = "rating")
-    private Long rating;
-
-    @Column(name = "comment_id")
-    private Long  commentId;
+    @Column(name = "comment_count")
+    private Long  commentCount;
 
     @Column(name = "picture")
     private String picture;
 
-    public Long getAffiche_id() {
+    @Column(name = "short_description")
+    private String shortDescription;
+
+    public Long getAfficheId() {
         return afficheId;
     }
 
-    public void setAffiche_id(Long affiche_id) {
-        this.afficheId = affiche_id;
+    public void setAfficheId(Long afficheId) {
+        this.afficheId = afficheId;
     }
 
-    public String getAffiche_name() {
+    public String getAfficheName() {
         return afficheName;
     }
 
-    public void setAffiche_name(String affiche_name) {
-        this.afficheName = affiche_name;
+    public void setAfficheName(String afficheName) {
+        this.afficheName = afficheName;
     }
 
-    public String getAffiche_descriprion() {
+    public String getAfficheDescriprion() {
         return afficheDescriprion;
     }
 
-    public void setAffiche_descriprion(String affiche_descriprion) {
-        this.afficheDescriprion = affiche_descriprion;
+    public void setAfficheDescriprion(String afficheDescriprion) {
+        this.afficheDescriprion = afficheDescriprion;
     }
 
-    public Long getRating() {
-        return rating;
+
+    public Long getCommentCount() {
+        return commentCount;
     }
 
-    public void setRating(Long rating) {
-        this.rating = rating;
-    }
-
-    public Long getComment_id() {
-        return afficheId;
-    }
-
-    public void setComment_id(Long comment_id) {
-        this.commentId = comment_id;
+    public void setCommentCount(Long commentId) {
+        this.commentCount = commentId;
     }
 
     public String getPicture() {
@@ -71,5 +65,13 @@ public class Affiche {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getShortDescription() {
+        return shortDescription;
+    }
+
+    public void setShortDescription(String shortDescription) {
+        this.shortDescription = shortDescription;
     }
 }

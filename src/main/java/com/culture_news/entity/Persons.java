@@ -9,14 +9,14 @@ public class Persons {
 
     @Id
     @Column(name = "person_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personId;
     @Column(name = "person_name")
     private String personName;
     @Column(name = "occupation")
     private String occupation;
-    @Column(name = "born_date")
-    private Date bornDate;
+    @Column(name = "date")
+    private String date;
     @Column(name = "description")
     private String description;
     @Column(name = "photo")
@@ -26,20 +26,20 @@ public class Persons {
 
     }
 
-    public Long getPerson_id() {
+    public Long getPersonId() {
         return personId;
     }
 
-    public void setPerson_id(Long person_id) {
-        this.personId = person_id;
+    public void setPersonId(Long personId) {
+        this.personId = personId;
     }
 
-    public String getPerson_name() {
+    public String getPersonName() {
         return personName;
     }
 
-    public void setPerson_name(String person_name) {
-        this.personName = person_name;
+    public void setPersonName(String personName) {
+        this.personName = personName;
     }
 
     public String getOccupation() {
@@ -50,13 +50,6 @@ public class Persons {
         this.occupation = occupation;
     }
 
-    public Date getBorn_date() {
-        return bornDate;
-    }
-
-    public void setBorn_date(Date born_date) {
-        this.bornDate = born_date;
-    }
 
     public String getDescription() {
         return description;
@@ -72,5 +65,13 @@ public class Persons {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

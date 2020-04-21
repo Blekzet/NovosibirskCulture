@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Comments {
     @Id
     @Column(name = "comment_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
 
     @Column(name = "user_id")
@@ -22,26 +22,32 @@ public class Comments {
     @Column(name = "text")
     private String text;
 
-    @Column(name = "rating")
-    private Long rating;
+    @Column(name = "news_id")
+    private Long newsId;
+    @Column(name = "place_id")
+    private Long placeId;
+    @Column(name = "person_id")
+    private Long personId;
+    @Column(name = "affiche_id")
+    private Long afficheId;
 
     public Comments() {
     }
 
-    public Long getComment_id() {
+    public Long getCommentId() {
         return commentId;
     }
 
-    public void setComment_id(Long comment_id) {
-        this.commentId = comment_id;
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
-    public Long getUser_id() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUser_id(Long user_id) {
-        this.userId = user_id;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getText() {
@@ -52,12 +58,35 @@ public class Comments {
         this.text = text;
     }
 
-    public Long getRating() {
-        return rating;
+    public Long getNewsId() {
+        return newsId;
     }
 
-    public void setRating(Long rating) {
-        this.rating = rating;
+    public void setNewsId(Long newsId) {
+        this.newsId = newsId;
     }
-    
+
+    public Long getPlaceId() {
+        return placeId;
+    }
+
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
+    }
+
+    public Long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(Long personId) {
+        this.personId = personId;
+    }
+
+    public Long getAfficheId() {
+        return afficheId;
+    }
+
+    public void setAfficheId(Long afficheId) {
+        this.afficheId = afficheId;
+    }
 }

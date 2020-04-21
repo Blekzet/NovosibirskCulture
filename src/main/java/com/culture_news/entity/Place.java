@@ -1,13 +1,14 @@
 package com.culture_news.entity;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "places")
 public class Place {
     @Id
     @Column(name = "place_id")
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long placeId;
     @Column(name = "place_name")
     private String placeName;
@@ -24,23 +25,26 @@ public class Place {
     @Column(name = "picture")
     private String picture;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Category> placeCategory;
+
     public Place() {
     }
 
-    public Long getPlace_id() {
+    public Long getPlaceId() {
         return placeId;
     }
 
-    public void setPlace_id(Long place_id) {
-        this.placeId = place_id;
+    public void setPlaceId(Long placeId) {
+        this.placeId = placeId;
     }
 
-    public String getPlace_name() {
+    public String getPlaceName() {
         return placeName;
     }
 
-    public void setPlace_name(String place_name) {
-        this.placeName = place_name;
+    public void setPlaceName(String placeName) {
+        this.placeName = placeName;
     }
 
     public String getSite() {
@@ -59,12 +63,12 @@ public class Place {
         this.address = address;
     }
 
-    public String getPhone_number() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhone_number(String phone_number) {
-        this.phoneNumber = phone_number;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -89,5 +93,13 @@ public class Place {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public Set<Category> getPlaceCategory() {
+        return placeCategory;
+    }
+
+    public void setPlaceCategory(Set<Category> placeCategory) {
+        this.placeCategory = placeCategory;
     }
 }

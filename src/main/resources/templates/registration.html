@@ -1,28 +1,98 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Регистрация</title>
-</head>
-<body>
-<div class="sidebar">
+    <meta charset="UTF-8">
+    <title>Культура Новосибирска</title>
+    <link type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link type="text/css" href="../static/css/pgwslider.css" th:href="@{/css/pgwslider.css}" rel="stylesheet"/>
 
-    <form action="#" th:action="@{/registration}" th:object="${userForm}" method="POST">
-        <div>
-            <label>Имя пользователя</label>
-            <input type="text" placeholder="Username" th:field="*{username}"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="../static/js/pgwslider.js" th:src="@{/js/pgwslider.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body class="center-block">
+<header th:replace="fragments/header">
+</header>
+
+<nav th:replace="fragments/menu">
+</nav>
+
+
+
+
+<div class="container">
+    <div class="login-block">
+        <h1 href="" class="login-title"> Регистрация </h1>
+        <div class="login-form">
+            <form action="#" th:action="@{/registration}" th:object="${user}" method="POST">
+                <div>
+                    <div th:if="${error}">
+                        <div class="alert alert-danger">
+                            Ошибка входа
+                        </div>
+                    </div>
+                    <div th:if="${usernameError}">
+                        <div class="alert alert-danger">
+                            Пользователь с таким именем уже существует
+                        </div>
+                    </div>
+                    <div th:if="${passwordError}">
+                        <div class="alert alert-danger" th:text="${passwordError}">
+                            The error message
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="userName">Имя пользователя</label>:
+                        <input type="text" th:field = "*{userName}"
+                               id="userName"
+                               name="userName"
+                               class="form-control"
+                               autofocus="autofocus"
+                               placeholder="Username"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>:
+                        <input type="password" th:field = "*{password}"
+                               id="password"
+                               name="password"
+                               class="form-control"
+                               placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Подтвердите пароль</label>:
+                        <input type="password" th:field = "*{passwordConfirm}"
+                               id="passwordConfirm"
+                               name="passwordConfirm"
+                               class="form-control"
+                               placeholder="Repeat password">
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="submit"
+                                       name="reg-submit"
+                                       id="reg-submit"
+                                       class="form-control btn btn-info"
+                                       value="Зарегистрироваться">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-        <div>
-            <label>Пароль</label>
-            <input type="password" placeholder="Password"th:field="*{password}"/>
-        </div>
-        <button type="submit">Зарегистрироваться</button>
-    </form>
+    </div>
 </div>
+
+
 </body>
+<footer th:replace="fragments/footer">
+</footer>
 </html>
