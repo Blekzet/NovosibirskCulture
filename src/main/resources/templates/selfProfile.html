@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="UTF-8">
+    <title>Культура Новосибирска</title>
+    <link type="text/css" href="../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
+    <link type="text/css" href="../static/css/pgwslider.css" th:href="@{/css/pgwslider.css}" rel="stylesheet"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="../static/js/pgwslider.js" th:src="@{/js/pgwslider.js}"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body class="center-block">
+<header th:replace="fragments/header">
+</header>
+
+<nav th:replace="fragments/menu">
+</nav>
+
+
+<div class="container">
+    <aside th:replace="fragments/aside:: sidebar(sidebarData=${sidebarData})"> </aside>
+
+    <div class="news-container">
+
+        <h1 class="news-title" th:text="${#authentication.principal.userName}">Имя пользователя</h1>
+        <img class="avatar-img" th:src = "@{${#authentication.principal.avatar}}" >
+        <div class="place-inner">
+            <label for="user-name"> Имя: </label>
+            <span id="user-name" class="news-text" th:text="${#authentication.principal.firstName}">имя</span>
+            <br>
+            <label for="category-name"> Фамилия: </label>
+            <span id="category-name" class="news-category"  th:text="${#authentication.principal.lastName}">фамилия</span>
+            <br>
+            <label for="place-email"> Электронная почта: </label>
+            <span id="place-email" class="news-text" th:text="${#authentication.principal.email}">электронная почта</span>
+            <br>
+        </div>
+        <a href="/changeProfile" th:href="@{/changeProfile}">Изменить данные</a>
+        <br>
+        <a href="/changePassword" th:href="@{/changePassword}">Изменить пароль</a>
+        <br>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">Страница администрации</a>
+        <br>
+        <a href="/logout" th:href="@{/logout}">Выйти</a>
+    </div>
+</div>
+
+
+
+</body>
+<footer th:replace="fragments/footer">
+</footer>
+</html>

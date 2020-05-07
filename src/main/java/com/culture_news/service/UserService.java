@@ -1,9 +1,12 @@
 package com.culture_news.service;
 
 
+import com.culture_news.entity.Place;
 import com.culture_news.entity.Role;
 import com.culture_news.entity.User;
+import com.culture_news.entity.UsersRoles;
 import com.culture_news.repositories.UserRepository;
+import com.culture_news.repositories.UsersRolesRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -12,6 +15,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import javax.transaction.Transactional;
 import java.util.Collections;
 import java.util.List;
@@ -26,6 +30,8 @@ public class UserService implements UserDetailsService {
     private UserRepository userRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
+    @Autowired
+    private UsersRolesRepository usersRolesRepository;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -40,8 +46,13 @@ public class UserService implements UserDetailsService {
         Optional<User> userFromDb = userRepository.findById(userId);
         return userFromDb.orElse(new User());
     }
-    public List<User> allUsers() {
-        return userRepository.findAll();
+
+    public boolean changeUser(User user) {
+        if (userRepository.findByUserName(user.getUsername()) != null) {
+            return false;
+        }
+
+        return true;
     }
 
     @Transactional
@@ -62,6 +73,10 @@ public class UserService implements UserDetailsService {
             return true;
         }
         return false;
+    }
+
+    public void addRoleUser(Long userId) {
+        usersRolesRepository.save(new UsersRoles(userId, 2L));
     }
 
 }

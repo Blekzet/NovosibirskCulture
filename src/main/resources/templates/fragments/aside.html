@@ -4,11 +4,11 @@
             <h1 class="sidebar-title" >Авторизация</h1>
             <a href="/login" th:href="@{/login}">Вход</a>
             <br>
-            <a href="/login" th:href="@{/registration}">Регистрация</a>
+            <a href="/registration" th:href="@{/registration}">Регистрация</a>
         </div>
 
         <div class="login-sidebar" sec:authorize="isAuthenticated()">
-            <h1  class="sidebar-title"sec:authentication="name">Username</h1>
+            <h1  class="sidebar-title" sec:authentication="name">Username</h1>
             <img class ="user-avatar" th:src="${#authentication.principal.avatar}">
             <div sec:authorize="hasRole('ROLE_EDITOR') and hasRole('ROLE_ADMIN')">
                 <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -20,6 +20,7 @@
                     <a class="dropdown-item" href="/editor/addaffiche" th:href="@{/editor/addaffiche}">Добавить афишу</a>
                 </div>
             </div>
+            <a class="nav-link nav-item" href="/logout" th:href="@{/selfProfile}">Профиль</a>
             <a class="nav-link nav-item" href="/logout" th:href="@{/logout}">Выход</a>
         </div>
     </div>
