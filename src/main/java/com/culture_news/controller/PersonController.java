@@ -1,6 +1,8 @@
 package com.culture_news.controller;
 
+import com.culture_news.entity.Comments;
 import com.culture_news.entity.Persons;
+import com.culture_news.repositories.CommentsRepository;
 import com.culture_news.repositories.PersonsRepository;
 import com.culture_news.service.NewsService;
 import com.culture_news.service.PersonService;
@@ -22,6 +24,8 @@ public class PersonController {
     private NewsService newsService;
     @Autowired
     private PersonService personService;
+    @Autowired
+    private CommentsRepository commentsRepository;
 
     @GetMapping("/editor/addperson")
     public String addPersonPage(Model model) {
@@ -56,6 +60,8 @@ public class PersonController {
     @GetMapping("/person/{personId}")
     public String personPage(Model model, @PathVariable Long personId){
         model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("comments", commentsRepository.findByPersonId(personId));
+        model.addAttribute("saveComment", new Comments());
         model.addAttribute("person", personsRepository.getOne(personId));
         return "person";
     }

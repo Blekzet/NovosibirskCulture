@@ -1,7 +1,9 @@
 package com.culture_news.controller;
 
 import com.culture_news.entity.Category;
+import com.culture_news.entity.Comments;
 import com.culture_news.entity.Place;
+import com.culture_news.repositories.CommentsRepository;
 import com.culture_news.repositories.PlaceRepository;
 import com.culture_news.service.NewsService;
 import com.culture_news.service.PlaceService;
@@ -26,6 +28,9 @@ public class PlaceController {
     @Autowired
     private PlaceService placeService;
 
+    @Autowired
+    private CommentsRepository commentsRepository;
+
     @GetMapping("/editor/addplace")
     public String placePage(Model model) {
         model.addAttribute("sidebarData", newsService.fourNewsList());
@@ -49,6 +54,14 @@ public class PlaceController {
         return "addplace";
     }
 
+    public Model setPlaceList(Long placeId, Model model){
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("comments", commentsRepository.findByPlaceId(placeId));
+        model.addAttribute("saveComment", new Comments());
+        model.addAttribute("place", placeRepository.getOne(placeId));
+        return model;
+    }
+
     @GetMapping("/music")
     public String musicPage(Model model){
         model.addAttribute("sidebarData", newsService.fourNewsList());
@@ -58,8 +71,7 @@ public class PlaceController {
     }
     @GetMapping("/music/{placeId}")
     public String musicList(@PathVariable Long placeId, Model model) {
-        model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("place", placeRepository.getOne(placeId));
+        model = setPlaceList(placeId, model);
         return "category";
     }
     @GetMapping("/museums")
@@ -72,8 +84,7 @@ public class PlaceController {
     }
     @GetMapping("/museums/{placeId}")
     public String museumList(@PathVariable Long placeId, Model model) {
-        model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("place", placeRepository.getOne(placeId));
+        model = setPlaceList(placeId, model);
         return "category";
     }
     @GetMapping("/cinema")
@@ -85,8 +96,7 @@ public class PlaceController {
     }
     @GetMapping("/cinema/{placeId}")
     public String cinemaList(@PathVariable Long placeId, Model model) {
-        model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("place", placeRepository.getOne(placeId));
+        model = setPlaceList(placeId, model);
         return "category";
     }
     @GetMapping("/theaters")
@@ -98,8 +108,7 @@ public class PlaceController {
     }
     @GetMapping("/theaters/{placeId}")
     public String theatersList(@PathVariable Long placeId, Model model) {
-        model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("place", placeRepository.getOne(placeId));
+        model = setPlaceList(placeId, model);
         return "category";
     }
 

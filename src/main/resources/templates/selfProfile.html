@@ -31,26 +31,30 @@
 
     <div class="news-container">
 
-        <h1 class="news-title" th:text="${#authentication.principal.userName}">Имя пользователя</h1>
-        <img class="avatar-img" th:src = "@{${#authentication.principal.avatar}}" >
+        <h1 class="news-title" th:text="${user.userName}">Имя пользователя</h1>
+        <img class="avatar-img" th:src = "@{${user.avatar}}" >
         <div class="place-inner">
             <label for="user-name"> Имя: </label>
-            <span id="user-name" class="news-text" th:text="${#authentication.principal.firstName}">имя</span>
+            <span id="user-name" class="news-text" th:text="${user.firstName}">имя</span>
             <br>
             <label for="category-name"> Фамилия: </label>
-            <span id="category-name" class="news-category"  th:text="${#authentication.principal.lastName}">фамилия</span>
+            <span id="category-name" class="news-category"  th:text="${user.lastName}">фамилия</span>
             <br>
             <label for="place-email"> Электронная почта: </label>
-            <span id="place-email" class="news-text" th:text="${#authentication.principal.email}">электронная почта</span>
+            <span id="place-email" class="news-text" th:text="${user.email}">электронная почта</span>
             <br>
         </div>
-        <a href="/changeProfile" th:href="@{/changeProfile}">Изменить данные</a>
+        <a th:href="@{/user/changeUserAvatar}">Изменить аватар</a>
         <br>
-        <a href="/changePassword" th:href="@{/changePassword}">Изменить пароль</a>
+        <a  th:href="@{/user/changeProfile}">Изменить данные</a>
+        <br>
+        <a th:href="@{/user/changeUserName}">Изменить никнейм</a>
+        <br>
+        <a  th:href="@{/user/changePassword}">Изменить пароль</a>
         <br>
         <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/admin}">Страница администрации</a>
         <br>
-        <a href="/logout" th:href="@{/logout}">Выйти</a>
+        <a th:href="@{/logout}">Выйти</a>
     </div>
 </div>
 

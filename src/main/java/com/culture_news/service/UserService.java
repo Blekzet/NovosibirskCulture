@@ -47,11 +47,36 @@ public class UserService implements UserDetailsService {
         return userFromDb.orElse(new User());
     }
 
-    public boolean changeUser(User user) {
-        if (userRepository.findByUserName(user.getUsername()) != null) {
-            return false;
-        }
-
+    @Transactional
+    public boolean changeUser(User user, User oldUser) {
+        em.createQuery("UPDATE User SET firstName = :newFirstName WHERE firstName = :oldFirstName")
+                .setParameter("newFirstName" , user.getFirstName())
+                .setParameter("oldFirstName" , oldUser.getFirstName())
+                .executeUpdate();
+        em.createQuery("UPDATE User SET lastName= :newLastName WHERE lastName = :oldLastName")
+                .setParameter("newLastName",user.getLastName())
+                .setParameter("oldLastName",oldUser.getLastName())
+                .executeUpdate();
+        em.createQuery("UPDATE User SET email= :newEmail WHERE email = :oldEmail")
+                .setParameter("newEmail",user.getEmail())
+                .setParameter("oldEmail",oldUser.getEmail())
+                .executeUpdate();
+        return true;
+    }
+    @Transactional
+    public boolean changeUserName(User user, User oldUser) {
+        em.createQuery("UPDATE User SET userName = :newUserName WHERE userName = :oldUserName")
+                .setParameter("newUserName" , user.getUserName())
+                .setParameter("oldUserName" , oldUser.getUserName())
+                .executeUpdate();
+        return true;
+    }
+    @Transactional
+    public boolean changeUserAvatar(User user, User oldUser) {
+        em.createQuery("UPDATE User SET avatar = :newAvatar WHERE avatar = :oldAvatar")
+                .setParameter("newAvatar" , user.getAvatar())
+                .setParameter("oldAvatar" , oldUser.getAvatar())
+                .executeUpdate();
         return true;
     }
 
@@ -61,8 +86,13 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
+        user.setAvatar("https://svgsilh.com/svg/159236-9e9e9e.svg");
+        user.setFirstName("Не указано");
+        user.setLastName("Не указана");
+        user.setEmail("Не указан");
         user.setRoles(Collections.singleton(new Role(1L, "ROLE_USER")));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setPasswordConfirm(passwordEncoder.encode(user.getPasswordConfirm()));
         userRepository.save(user);
         return true;
     }

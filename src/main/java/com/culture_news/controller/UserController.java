@@ -73,29 +73,60 @@ public class UserController {
         return "admin";
     }
 
-    @GetMapping("/selfProfile")
+    @GetMapping("/user/selfProfile")
     public String selfProfilePage(Model model, Principal principal) {
+        model.addAttribute("user", userRepository.findByUserName(principal.getName()));
         model.addAttribute("sidebarData", newsService.fourNewsList());
         return "selfProfile";
     }
 
-    @GetMapping("/changeProfile")
+    @GetMapping("/user/profile/{userId}")
+    public String profilePage(Model model, @PathVariable Long userId){
+        model.addAttribute("user", userService.findUserById(userId));
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        return "profile";
+    }
+
+    @GetMapping("/user/changeProfile")
     public String changeProfilePage(Model model, Principal principal) {
         model.addAttribute("user", userRepository.findByUserName(principal.getName()));
         return "changeProfile";
     }
     @PostMapping("/changeProfile")
     public String changeProfileSave(@ModelAttribute("user") User user, Model model, Principal principal){
-        return "selfProfile";
+        userService.changeUser(user, userRepository.findByUserName(principal.getName()));
+        return "redirect:/user/selfProfile";
     }
-    @GetMapping("/changePassword")
+    @GetMapping("/user/changeUserAvatar")
+    public String changeAvatar(Model model, Principal principal) {
+        model.addAttribute("user", userRepository.findByUserName(principal.getName()));
+        return "changeUserAvatar";
+    }
+    @PostMapping("/changeUserAvatar")
+    public String changeAvatarSave(@ModelAttribute("user") User user, Model model, Principal principal){
+        userService.changeUserAvatar(user, userRepository.findByUserName(principal.getName()));
+        return "redirect:/user/selfProfile";
+    }
+
+    @GetMapping("/user/changeUserName")
+    public String changeUserName(Model model, Principal principal) {
+        model.addAttribute("user", userRepository.findByUserName(principal.getName()));
+        return "changeUserName";
+    }
+    @PostMapping("/changeUserName")
+    public String changeUserNameSave(@ModelAttribute("user") User user, Model model, Principal principal){
+        userService.changeUserName(user, userRepository.findByUserName(principal.getName()));
+        return "redirect:/user/selfProfile";
+    }
+
+    @GetMapping("/user/changePassword")
     public String changePasswordPage(Model model, Principal principal){
         model.addAttribute("user", userRepository.findByUserName(principal.getName()));
         return "changePassword";
     }
     @PostMapping("/changePassword")
     public String changePasswordSave(@ModelAttribute("user") User user, Model model, Principal principal){
-        return "selfProfile";
+        return "redirect:/user/selfProfile";
     }
 
 }

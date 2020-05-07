@@ -25,34 +25,38 @@ public class CommentsController {
     private UserRepository userRepository;
 
     @PostMapping("/comment/news/{newsId}")
-    public String saveNewsComment(@PathVariable Long newsId, @ModelAttribute("comment") Comments comment, Model model, HttpServletRequest request, Principal principal){
+    public String saveNewsComment(@PathVariable Long newsId, @ModelAttribute("saveComment") Comments comment, Model model, HttpServletRequest request, Principal principal){
         comment.setNewsId(newsId);
         User user = userRepository.findByUserName(principal.getName());
         comment.setUserId(user.getUserId());
+        comment.setUserName(user.getUserName());
         commentsRepository.save(comment);
         return "redirect:" + request.getHeader("referer");
     }
     @PostMapping("/comment/place/{placeId}")
-    public String savePlaceComment(@PathVariable Long placeId, @ModelAttribute("comment") Comments comment, Model model, HttpServletRequest request, Principal principal){
+    public String savePlaceComment(@PathVariable Long placeId, @ModelAttribute("saveComment") Comments comment, Model model, HttpServletRequest request, Principal principal){
         comment.setPlaceId(placeId);
         User user = userRepository.findByUserName(principal.getName());
         comment.setUserId(user.getUserId());
+        comment.setUserName(user.getUserName());
         commentsRepository.save(comment);
         return "redirect:" + request.getHeader("referer");
     }
     @PostMapping("/comment/affiche/{afficheId}")
-    public String saveAfficheComment(@PathVariable Long afficheId, @ModelAttribute("comment") Comments comment, Model model, HttpServletRequest request, Principal principal){
+    public String saveAfficheComment(@PathVariable Long afficheId, @ModelAttribute("saveComment") Comments comment, Model model, HttpServletRequest request, Principal principal){
         comment.setAfficheId(afficheId);
         User user = userRepository.findByUserName(principal.getName());
         comment.setUserId(user.getUserId());
+        comment.setUserName(user.getUserName());
         commentsRepository.save(comment);
         return "redirect:" + request.getHeader("referer");
     }
     @PostMapping("/comment/person/{personId}")
-    public String savePersonComment(@PathVariable Long personId, @ModelAttribute("comment") Comments comment, Model model, HttpServletRequest request, Principal principal){
+    public String savePersonComment(@PathVariable Long personId, @ModelAttribute("saveComment") Comments comment, Model model, HttpServletRequest request, Principal principal){
         comment.setPersonId(personId);
         User user = userRepository.findByUserName(principal.getName());
         comment.setUserId(user.getUserId());
+        comment.setUserName(user.getUserName());
         commentsRepository.save(comment);
         return "redirect:" + request.getHeader("referer");
     }

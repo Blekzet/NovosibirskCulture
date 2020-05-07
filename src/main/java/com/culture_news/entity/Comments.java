@@ -16,6 +16,9 @@ public class Comments {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long commentId;
 
+    @Column(name = "user_name")
+    private String userName;
+
     @Column(name = "user_id")
     private Long userId;
 
@@ -40,14 +43,6 @@ public class Comments {
 
     public void setCommentId(Long commentId) {
         this.commentId = commentId;
-    }
-
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
     }
 
     public String getText() {
@@ -88,5 +83,21 @@ public class Comments {
 
     public void setAfficheId(Long afficheId) {
         this.afficheId = afficheId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }

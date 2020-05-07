@@ -34,11 +34,6 @@
         <div class="login-form">
             <form action="#" th:action="@{/changeProfile}" th:object="${user}" method="POST">
                 <div>
-                    <div th:if="${error}">
-                        <div class="alert alert-danger">
-                            Ошибка
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="firstName">Имя</label>:
                         <input type="text" th:field = "*{firstName}"

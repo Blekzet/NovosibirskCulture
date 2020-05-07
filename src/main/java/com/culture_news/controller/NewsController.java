@@ -3,6 +3,7 @@ package com.culture_news.controller;
 import com.culture_news.entity.Category;
 import com.culture_news.entity.Comments;
 import com.culture_news.entity.News;
+import com.culture_news.repositories.CommentsRepository;
 import com.culture_news.repositories.NewsRepository;
 import com.culture_news.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class NewsController {
     private NewsRepository newsRepository;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private CommentsRepository commentsRepository;
 
 
 
@@ -56,7 +59,8 @@ public class NewsController {
     @GetMapping("/news/{newsId}")
     public String newsPage(@PathVariable Long newsId, Model model) {
         model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("comment", new Comments());
+        model.addAttribute("comments", commentsRepository.findByNewsId(newsId));
+        model.addAttribute("saveComment", new Comments());
         model.addAttribute("news", newsRepository.getOne(newsId));
         return "news";
     }

@@ -26,43 +26,39 @@
 </nav>
 
 
+
+
 <div class="container">
-    <aside th:replace="fragments/aside:: sidebar(sidebarData=${sidebarData})"> </aside>
-
-    <div class="news-container" th:object="${affiche}">
-        <h1 class="news-title" th:text="${affiche.afficheName}">Название афиши</h1>
-        <div class="news-meta">
-            <a href="" class="comment-counter" th:text="${affiche.commentCount}">
-                <i class="fa fa-comments-o"></i>Количество комментариев
-            </a>
-        </div>
-        <div class="news-inner">
-            <img class="news-img" th:src = "@{${affiche.picture}}">
-
-            <p class="news-text" th:text="${affiche.afficheDescriprion}">
-                описание афиши
-            </p>
-        </div>
-        <div class="comments-container" >
-            <label class="comments-title">Комментарии: </label>
-            <ul class="comments-wrapper">
-                <li class="comments-elem" th:each = "comment:${comments}">
-                    <label> <a th:href="@{'/user/profile/' + ${comment.userId}}" th:text="${comment.userName}">Пользователь</a></label>
-                    <p th:text="${comment.text}">Коментарий пользователя</p>
-                </li>
-            </ul>
-        </div>
-
-        <div class="comment-form" sec:authorize="isAuthenticated()" >
-            <form th:action="@{'/comment/affiche/' + ${affiche.afficheId}}" th:object="${saveComment}"  method="post">
-                <label>Ваш комметарий:</label>
-                <textarea id="text" name="text" class="text" placeholder="Введите текст комментария" cols="110" rows="10"> </textarea>
-                <button type="submit" class="btn btn-outline-success my-2 my-sm-0 category-btn">Применить</button>
+    <div class="login-block">
+        <h1 href="" class="login-title"> Смена данных пользователя </h1>
+        <div class="login-form">
+            <form action="#" th:action="@{/changeUserAvatar}" th:object="${user}" method="POST">
+                <div>
+                    <div class="form-group">
+                        <label for="avatar">Ссылка на фотографию</label>:
+                        <input type="text" th:field = "*{avatar}"
+                               id="avatar"
+                               name="avatar"
+                               class="form-control"
+                               autofocus="autofocus"
+                               placeholder="Avatar URL"/>
+                    </div>
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-sm-6 col-sm-offset-3">
+                                <input type="submit"
+                                       name="reg-submit"
+                                       id="reg-submit"
+                                       class="form-control btn btn-info"
+                                       value="Сохранить">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
 </div>
-
 
 
 </body>

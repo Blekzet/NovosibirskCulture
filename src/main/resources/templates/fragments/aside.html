@@ -10,7 +10,7 @@
         <div class="login-sidebar" sec:authorize="isAuthenticated()">
             <h1  class="sidebar-title" sec:authentication="name">Username</h1>
             <img class ="user-avatar" th:src="${#authentication.principal.avatar}">
-            <div sec:authorize="hasRole('ROLE_EDITOR') and hasRole('ROLE_ADMIN')">
+            <div sec:authorize="hasRole('ROLE_EDITOR')">
                 <a class="dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Возможности редактора</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -20,7 +20,7 @@
                     <a class="dropdown-item" href="/editor/addaffiche" th:href="@{/editor/addaffiche}">Добавить афишу</a>
                 </div>
             </div>
-            <a class="nav-link nav-item" href="/logout" th:href="@{/selfProfile}">Профиль</a>
+            <a class="nav-link nav-item" th:href="@{/user/selfProfile}">Профиль</a>
             <a class="nav-link nav-item" href="/logout" th:href="@{/logout}">Выход</a>
         </div>
     </div>

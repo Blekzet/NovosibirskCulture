@@ -47,26 +47,18 @@
                 текст
             </p>
         </div>
-        <div class="comments-container">
+        <div class="comments-container" >
             <label class="comments-title">Комментарии: </label>
             <ul class="comments-wrapper">
-                <li class="comments-elem">
-                    <label> <a href="">Пользователь</a></label>
-                    <p>Коментарий пользователя</p>
-                </li>
-                <li class="comments-elem">
-                    <label> <a href="">Пользователь</a></label>
-                    <p>Коментарий пользователя</p>
-                </li>
-                <li class="comments-elem">
-                    <label> <a href="">Пользователь</a></label>
-                    <p>Коментарий пользователя</p>
+                <li class="comments-elem" th:each = "comment:${comments}">
+                    <label> <a th:href="@{'/user/profile/' + ${comment.userId}}" th:text="${comment.userName}">Пользователь</a></label>
+                    <p th:text="${comment.text}">Коментарий пользователя</p>
                 </li>
             </ul>
         </div>
 
         <div class="comment-form" sec:authorize="isAuthenticated()" >
-            <form th:action="@{'/comment/person/' + ${person.personId}}" th:object="${comment}"  method="post">
+            <form th:action="@{'/comment/person/' + ${person.personId}}" th:object="${saveComment}"  method="post">
                 <label>Ваш комметарий:</label>
                 <textarea id="text" name="text" class="text" placeholder="Введите текст комментария" cols="110" rows="10"> </textarea>
                 <button type="submit" class="btn btn-outline-success my-2 my-sm-0 category-btn">Применить</button>

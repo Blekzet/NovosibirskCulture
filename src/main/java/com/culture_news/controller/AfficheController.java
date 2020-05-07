@@ -1,7 +1,9 @@
 package com.culture_news.controller;
 
 import com.culture_news.entity.Affiche;
+import com.culture_news.entity.Comments;
 import com.culture_news.repositories.AfficheRepository;
+import com.culture_news.repositories.CommentsRepository;
 import com.culture_news.service.AfficheService;
 import com.culture_news.service.NewsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,8 @@ public class AfficheController {
     private AfficheService afficheService;
     @Autowired
     private AfficheRepository afficheRepository;
+    @Autowired
+    private CommentsRepository commentsRepository;
 
     @GetMapping("/editor/addaffiche")
     public String addAffichePage(Model model) {
@@ -56,6 +60,8 @@ public class AfficheController {
     @GetMapping("/affiche/{afficheId}")
     public String affichePage(@PathVariable Long afficheId, Model model) {
         model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("comments", commentsRepository.findByAfficheId(afficheId));
+        model.addAttribute("saveComment", new Comments());
         model.addAttribute("affiche", afficheRepository.getOne(afficheId));
         return "affiche";
     }
