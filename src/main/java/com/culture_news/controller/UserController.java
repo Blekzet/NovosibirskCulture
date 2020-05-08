@@ -1,11 +1,11 @@
 package com.culture_news.controller;
 
-import com.culture_news.entity.News;
 import com.culture_news.entity.User;
 import com.culture_news.repositories.UserRepository;
 import com.culture_news.service.NewsService;
 import com.culture_news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -21,6 +21,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
 
     @GetMapping("/login")
     public String loginPage() {
@@ -122,10 +124,24 @@ public class UserController {
     @GetMapping("/user/changePassword")
     public String changePasswordPage(Model model, Principal principal){
         model.addAttribute("user", userRepository.findByUserName(principal.getName()));
+        model.addAttribute("oldPassword", new String());
         return "changePassword";
     }
     @PostMapping("/changePassword")
-    public String changePasswordSave(@ModelAttribute("user") User user, Model model, Principal principal){
+    public String changePasswordSave(@ModelAttribute("user") User user, @ModelAttribute("oldPassword") String oldPassword, Model model, Principal principal){
+        User oldUserData = userRepository.findByUserName(principal.getName());
+
+        if (passwordEncoder.matches(user.getPassword(), oldUserData.getPassword())){
+            model.addAttribute("matchError", "Новый пароль совпадает со старым");
+            return "changePassword";
+        }
+
+        if (!passwordEncoder.matches(oldPassword, oldUserData.getPassword())){
+            model.addAttribute("error", "Неправильно введен старый пароль");
+            return "changePassword";
+        }
+
+        userService.changeUserPassword(user, oldUserData);
         return "redirect:/user/selfProfile";
     }
 

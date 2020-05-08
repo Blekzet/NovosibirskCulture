@@ -82,7 +82,7 @@ public class News {
     }
 
     public void setCommentsCount(Long commentsCount) {
-        this.commentsCount = commentsCount;
+        this.commentsCount += commentsCount;
     }
 
     public String getDate() {

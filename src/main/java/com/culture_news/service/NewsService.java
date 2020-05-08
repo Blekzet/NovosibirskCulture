@@ -1,5 +1,6 @@
 package com.culture_news.service;
 
+import com.culture_news.entity.Affiche;
 import com.culture_news.entity.Category;
 import com.culture_news.entity.News;
 import com.culture_news.repositories.CategoryRepository;
@@ -27,6 +28,27 @@ public class NewsService{
     @Autowired
     private CategoryRepository categoryRepository;
 
+
+    @Transactional
+    public boolean saveNewsChange(News news, News oldNews) {
+        em.createQuery("UPDATE News SET title = :newTitle WHERE title = :oldTitle")
+                .setParameter("newTitle" , news.getTitle())
+                .setParameter("oldTitle" , oldNews.getTitle())
+                .executeUpdate();
+        em.createQuery("UPDATE News SET picture = :newPicture WHERE picture = :oldPicture")
+                .setParameter("newPicture" , news.getPicture())
+                .setParameter("oldPicture" , oldNews.getPicture())
+                .executeUpdate();
+        em.createQuery("UPDATE News SET shortDescription = :newShortDesc WHERE shortDescription = :oldShortDesc")
+                .setParameter("newShortDesc" , news.getShortDescription())
+                .setParameter("oldShortDesc" , oldNews.getShortDescription())
+                .executeUpdate();
+        em.createQuery("UPDATE News SET fullDescription = :newDesc WHERE fullDescription = :oldDesc")
+                .setParameter("newDesc" , news.getFullDescription())
+                .setParameter("oldDesc" , oldNews.getFullDescription())
+                .executeUpdate();
+        return true;
+    }
 
     @Transactional
     public boolean saveNews(News news, Category category) {

@@ -1,5 +1,6 @@
 package com.culture_news.controller;
 
+import com.culture_news.entity.Affiche;
 import com.culture_news.entity.Category;
 import com.culture_news.entity.Comments;
 import com.culture_news.entity.News;
@@ -63,6 +64,28 @@ public class NewsController {
         model.addAttribute("saveComment", new Comments());
         model.addAttribute("news", newsRepository.getOne(newsId));
         return "news";
+    }
+
+    @GetMapping("/editor/changeNews/{newsId}")
+    public String changeAffiche(@PathVariable Long newsId, Model model) {
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("news", newsRepository.getOne(newsId));
+        return "changeNews";
+    }
+
+    @PostMapping("/editor/changeNews/{newsId}")
+    public String changeAfficheSave(@PathVariable Long newsId, @ModelAttribute("affiche") News news, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", true);
+            return "changeNews";
+        }
+
+        if (!newsService.saveNewsChange(news, newsRepository.getOne(newsId))) {
+            model.addAttribute("addError", true);
+            return "changeNews";
+        }
+
+        return "redirect:/affiche/" + newsId;
     }
 
 

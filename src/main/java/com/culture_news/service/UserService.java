@@ -73,9 +73,23 @@ public class UserService implements UserDetailsService {
     }
     @Transactional
     public boolean changeUserAvatar(User user, User oldUser) {
-        em.createQuery("UPDATE User SET avatar = :newAvatar WHERE avatar = :oldAvatar")
+        em.createQuery("UPDATE User SET avatar = :newAvatar WHERE avatar = :oldAvatar and userId = :id")
                 .setParameter("newAvatar" , user.getAvatar())
                 .setParameter("oldAvatar" , oldUser.getAvatar())
+                .setParameter("id" , oldUser.getUserId())
+                .executeUpdate();
+        return true;
+    }
+    @Transactional
+    public boolean changeUserPassword(User user, User oldUser) {
+        String newPassword = passwordEncoder.encode(user.getPassword());
+        String confirmNewPassord = passwordEncoder.encode(user.getPasswordConfirm());
+        em.createQuery("UPDATE User SET password = :newPassword, passwordConfirm = :confirmNewPassword WHERE password = :oldPassword and passwordConfirm = :oldConfirmPassword and userId = :id")
+                .setParameter("newPassword" , newPassword)
+                .setParameter("confirmNewPassword" , confirmNewPassord)
+                .setParameter("oldPassword" , oldUser.getPassword())
+                .setParameter("oldConfirmPassword" , oldUser.getPasswordConfirm())
+                .setParameter("id" , oldUser.getUserId())
                 .executeUpdate();
         return true;
     }
@@ -86,7 +100,7 @@ public class UserService implements UserDetailsService {
             return false;
         }
 
-        user.setAvatar("https://svgsilh.com/svg/159236-9e9e9e.svg");
+        user.setAvatar("../img/emptyAvatar.jpg");
         user.setFirstName("Не указано");
         user.setLastName("Не указана");
         user.setEmail("Не указан");
@@ -94,6 +108,7 @@ public class UserService implements UserDetailsService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setPasswordConfirm(passwordEncoder.encode(user.getPasswordConfirm()));
         userRepository.save(user);
+
         return true;
     }
 
