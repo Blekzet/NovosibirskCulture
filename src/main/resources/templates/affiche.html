@@ -42,7 +42,11 @@
             <p class="news-text" th:text="${affiche.afficheDescriprion}">
                 описание афиши
             </p>
+            <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/changeAffiche/' + ${affiche.afficheId}}">
+            Редактировать Афишу
+            </a>
         </div>
+
         <div class="comments-container" >
             <label class="comments-title">Комментарии: </label>
             <ul class="comments-wrapper">

@@ -48,6 +48,9 @@
             <p class="news-text" th:text="${news.fullDescription}">
                 текст новости
             </p>
+            <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/changeNews/' + ${news.newsId}}">
+                Редактировать новость
+            </a>
         </div>
 
         <div class="comments-container" >

@@ -65,4 +65,29 @@ public class AfficheController {
         model.addAttribute("affiche", afficheRepository.getOne(afficheId));
         return "affiche";
     }
+
+    @GetMapping("/editor/changeAffiche/{afficheId}")
+    public String changeAffiche(@PathVariable Long afficheId, Model model) {
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("affiche", afficheRepository.getOne(afficheId));
+        model.addAttribute("oldAffiche", afficheRepository.getOne(afficheId));
+        return "changeAffiche";
+    }
+
+    @PostMapping("/editor/changeAffiche/{afficheId}")
+    public String changeAfficheSave(@PathVariable Long afficheId, @ModelAttribute("affiche") Affiche affiche, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", true);
+            return "changeAffiche";
+        }
+
+        if (!afficheService.saveAfficheChange(affiche, afficheRepository.getOne(afficheId))) {
+            model.addAttribute("addError", true);
+            return "changeAffiche";
+        }
+
+        return "redirect:/affiche/" + afficheId;
+    }
+
+
 }

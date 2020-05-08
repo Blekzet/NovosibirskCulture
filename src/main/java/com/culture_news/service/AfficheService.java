@@ -27,5 +27,25 @@ public class AfficheService {
         afficheRepository.save(affiche);
         return true;
     }
+    @Transactional
+    public boolean saveAfficheChange(Affiche affiche, Affiche oldAffiche) {
+        em.createQuery("UPDATE Affiche SET afficheName = :newName WHERE afficheName = :oldName")
+                .setParameter("newName" , affiche.getAfficheName())
+                .setParameter("oldName" , oldAffiche.getAfficheName())
+                .executeUpdate();
+        em.createQuery("UPDATE Affiche SET afficheDescriprion = :newDesc WHERE afficheDescriprion = :oldDesc")
+                .setParameter("newDesc" , affiche.getAfficheDescriprion())
+                .setParameter("oldDesc" , oldAffiche.getAfficheDescriprion())
+                .executeUpdate();
+        em.createQuery("UPDATE Affiche SET shortDescription = :newShortDesc WHERE shortDescription = :oldShortDesc")
+                .setParameter("newShortDesc" , affiche.getShortDescription())
+                .setParameter("oldShortDesc" , oldAffiche.getShortDescription())
+                .executeUpdate();
+        em.createQuery("UPDATE Affiche SET picture = :newPicture WHERE picture = :oldPicture")
+                .setParameter("newPicture" , affiche.getPicture())
+                .setParameter("oldPicture" , oldAffiche.getPicture())
+                .executeUpdate();
+        return true;
+    }
 
 }
