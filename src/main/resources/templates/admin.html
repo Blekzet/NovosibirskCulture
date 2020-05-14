@@ -26,6 +26,11 @@
 
 
 <div class="container">
+    <div th:if="${error}">
+        <div class="alert alert-danger">
+            Непредвиденная ошибка
+        </div>
+    </div>
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -46,8 +51,11 @@
                 <form th:action="@{'/admin/delete/' + ${user.userId}}" method="post">
                     <button type="submit">Delete user</button>
                 </form>
-                <form th:action="@{'/admin/addrole/' + ${user.userId}}" method="post">
+                <form th:action="@{'/admin/addRole/' + ${user.userId}}" method="post">
                     <button type="submit">Добавить роль редактора</button>
+                </form>
+                <form th:action="@{'/admin/deleteRole/' + ${user.userId}}" method="post">
+                    <button type="submit">Лешить роли редактора</button>
                 </form>
             </td>
         </tr>

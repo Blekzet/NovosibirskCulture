@@ -30,20 +30,22 @@
     <div class="addnews-block">
         <h1 class="addnews-title"> Редактировать персону </h1>
         <div class="addnews-form">
-            <form action="#" th:action="@{/editor/changePerson}" th:object="${person}" method="POST">
+            <form action="#" th:action="@{'/editor/changePerson/' + ${person.personId}}" th:object="${person}" method="POST">
                 <div>
-                    <input type="text" id="personName" name = "personName" class="form-control" placeholder="Имя персоны">
                     <div class="input-group">
-                        <textarea id="date" name="date" class="form-control" placeholder="Дата рождения, возраст и дата смерти формата ДР-ДС(В)"></textarea>
+                        <textarea id="personName" name = "personName" class="form-control" th:text="${person.personName}"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="photo" name="photo" class="form-control" placeholder="Ссылка на фотографию" cols="100" rows="1"></textarea>
+                        <textarea id="date" name="date" class="form-control" th:text="${person.date}"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="occupation" name="occupation" class="form-control" placeholder="Род занятий" cols="100" rows="3"></textarea>
+                        <textarea id="photo" name="photo" class="form-control" th:text="${person.photo}" cols="100" rows="1"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="description" name="description" class="form-control" placeholder="Текст новости" cols="100" rows="20"></textarea>
+                        <textarea id="occupation" name="occupation" class="form-control" th:text="${person.occupation}" cols="100" rows="3"> </textarea>
+                    </div>
+                    <div class="input-group">
+                        <textarea id="description" name="description" class="form-control" th:text="${person.description}" cols="100" rows="20"> </textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -53,7 +55,7 @@
                                    name="add-submit"
                                    id="add-submit"
                                    class="form-control btn btn-info"
-                                   value="Добавить">
+                                   value="Изменить">
                         </div>
                     </div>
                 </div>
@@ -62,9 +64,9 @@
                         Непредвиденная ошибка
                     </div>
                 </div>
-                <div th:if="${addpersonError}">
+                <div th:if="${addError}">
                     <div class="alert alert-danger">
-                        Ошибка добавления новости
+                        Ошибка изменения
                     </div>
                 </div>
             </form>

@@ -32,7 +32,9 @@
         <div class="addnews-form">
             <form action="#" th:action="@{'/editor/changeNews/' + ${news.newsId}}" th:object="${news}" method="POST">
                 <div>
-                    <input type="text" id="title" name = "title" class="form-control" th:placeholder="${news.title}">
+                    <div class="input-group">
+                        <textarea id="title" name = "title" class="form-control" th:text="${news.title}" cols="100" rows="1"> </textarea>
+                    </div>
                     <div class="input-group">
                         <textarea id="picture" name="picture" class="form-control" th:text="${news.picture}" cols="100" rows="1"> </textarea>
                     </div>
@@ -50,7 +52,7 @@
                                    name="add-submit"
                                    id="add-submit"
                                    class="form-control btn btn-info"
-                                   value="Добавить">
+                                   value="Изменить">
                         </div>
                     </div>
                 </div>

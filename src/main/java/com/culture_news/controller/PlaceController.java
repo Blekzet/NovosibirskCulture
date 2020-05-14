@@ -2,6 +2,7 @@ package com.culture_news.controller;
 
 import com.culture_news.entity.Category;
 import com.culture_news.entity.Comments;
+import com.culture_news.entity.Persons;
 import com.culture_news.entity.Place;
 import com.culture_news.repositories.CommentsRepository;
 import com.culture_news.repositories.PlaceRepository;
@@ -58,6 +59,29 @@ public class PlaceController {
             return "addplace";
         }
         return "addplace";
+    }
+
+    @GetMapping("/editor/changePlace/{placeId}")
+    public String changePlace(@PathVariable Long placeId, Model model) {
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("place", placeRepository.getOne(placeId));
+        return "changePlace";
+    }
+
+
+    @PostMapping("/editor/changePlace/{placeId}")
+    public String changePlaceSave(@PathVariable Long placeId, @ModelAttribute("place") Place place, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", true);
+            return "changePlace";
+        }
+
+        if (!placeService.savePlaceChange(place, placeId)) {
+            model.addAttribute("addError", true);
+            return "changePlace";
+        }
+
+        return "redirect:/place/" + placeId;
     }
 
     public Model setPlaceList(Long placeId, Model model){

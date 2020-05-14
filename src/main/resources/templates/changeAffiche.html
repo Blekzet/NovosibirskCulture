@@ -32,7 +32,9 @@
         <div class="addnews-form">
             <form action="#" th:action="@{'/editor/changeAffiche/' + ${affiche.afficheId}}" th:object="${affiche}" method="POST">
                 <div>
-                    <input type="text" id="afficheName" name = "afficheName" class="form-control" th:placeholder="${affiche.afficheName}">
+                    <div class="input-group">
+                        <textarea id="afficheName" name = "afficheName" class="form-control" th:text="${affiche.afficheName}" cols="100" rows="1"> </textarea>
+                    </div>
                     <div class="input-group">
                         <textarea id="picture" name="picture" class="form-control" th:text="${affiche.picture}" cols="100" rows="1"> </textarea>
                     </div>
@@ -50,7 +52,7 @@
                                    name="add-submit"
                                    id="add-submit"
                                    class="form-control btn btn-info"
-                                   value="Добавить">
+                                   value="Изменить">
                         </div>
                     </div>
                 </div>

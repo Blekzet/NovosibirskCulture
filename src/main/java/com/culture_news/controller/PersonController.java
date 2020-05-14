@@ -1,6 +1,7 @@
 package com.culture_news.controller;
 
 import com.culture_news.entity.Comments;
+import com.culture_news.entity.News;
 import com.culture_news.entity.Persons;
 import com.culture_news.repositories.CommentsRepository;
 import com.culture_news.repositories.PersonsRepository;
@@ -55,6 +56,28 @@ public class PersonController {
     public String deletePerson(@PathVariable Long personId, Model model) {
         personService.deletePerson(personsRepository.getOne(personId));
         return "index";
+    }
+    @GetMapping("/editor/changePerson/{personId}")
+    public String changePerson(@PathVariable Long personId, Model model) {
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("person", personsRepository.getOne(personId));
+        return "changePerson";
+    }
+
+
+    @PostMapping("/editor/changePerson/{personId}")
+    public String changePersonSave(@PathVariable Long personId, @ModelAttribute("person") Persons person, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("error", true);
+            return "changePerson";
+        }
+
+        if (!personService.savePersonChange(person, personId)) {
+            model.addAttribute("addError", true);
+            return "changePerson";
+        }
+
+        return "redirect:/person/" + personId;
     }
 
     @GetMapping("/personlist")

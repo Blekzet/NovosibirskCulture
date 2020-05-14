@@ -30,29 +30,28 @@
     <div class="addnews-block">
         <h1 class="addnews-title"> Редактировать место </h1>
         <div class="addnews-form">
-            <form action="#" th:action="@{/editor/changePlace}" th:object="${place}" method="POST">
+            <form action="#" th:action="@{'/editor/changePlace/' + ${place.placeId}}" th:object="${place}" method="POST">
                 <div>
-                    <input type="text" id="placeName" name = "placeName" class="form-control" placeholder="Название места">
-                    <div class="news-meta">
-                        <input type="text" id="name" th:object="${category}" name="name" class="form-control" placeholder="Категория">
+                    <div class="input-group">
+                        <textarea id="placeName" name = "placeName" class="form-control" th:text="${place.placeName}" cols="100" rows="1"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="picture" name="picture" class="form-control" placeholder="Фотография места" cols="100" rows="1"></textarea>
+                        <textarea id="picture" name="picture" class="form-control" th:text="${place.picture}" cols="100" rows="1"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="site" name="site" class="form-control" placeholder="Сайт места" cols="100" rows="1"></textarea>
+                        <textarea id="site" name="site" class="form-control" th:text="${place.site}" cols="100" rows="1"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="address" name="address" class="form-control" placeholder="Адрес места" cols="100" rows="1"></textarea>
+                        <textarea id="address" name="address" class="form-control" th:text="${place.address}" cols="100" rows="1"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="phoneNumber" name="phoneNumber" class="form-control" placeholder="Номер телефона места" cols="100" rows="1"></textarea>
+                        <textarea id="phoneNumber" name="phoneNumber" class="form-control" th:text="${place.phoneNumber}" cols="100" rows="1"> </textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="email" name="email" class="form-control" placeholder="электронная почта места" cols="100" rows="1"></textarea>
+                        <textarea id="email" name="email" class="form-control" th:text="${place.email}" cols="100" rows="1"></textarea>
                     </div>
                     <div class="input-group">
-                        <textarea id="description" name="description" class="form-control" placeholder="Описание места" cols="100" rows="20"></textarea>
+                        <textarea id="description" name="description" class="form-control" th:text="${place.description}" cols="100" rows="20"></textarea>
                     </div>
                 </div>
                 <div class="form-group">
@@ -62,7 +61,7 @@
                                    name="add-submit"
                                    id="add-submit"
                                    class="form-control btn btn-info"
-                                   value="Добавить">
+                                   value="Изменить">
                         </div>
                     </div>
                 </div>
@@ -71,9 +70,9 @@
                         Непредвиденная ошибка
                     </div>
                 </div>
-                <div th:if="${addplaceError}">
+                <div th:if="${addError}">
                     <div class="alert alert-danger">
-                        Ошибка добавления новости
+                        Ошибка изменения
                     </div>
                 </div>
             </form>

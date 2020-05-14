@@ -67,20 +67,20 @@ public class NewsController {
     }
 
     @GetMapping("/editor/changeNews/{newsId}")
-    public String changeAffiche(@PathVariable Long newsId, Model model) {
+    public String changeNews(@PathVariable Long newsId, Model model) {
         model.addAttribute("sidebarData", newsService.fourNewsList());
         model.addAttribute("news", newsRepository.getOne(newsId));
         return "changeNews";
     }
 
     @GetMapping("/editor/deleteNews/{newsId}")
-    public String deleteAffiche(@PathVariable Long newsId, Model model) {
+    public String deleteNews(@PathVariable Long newsId, Model model) {
         newsService.deleteNews(newsRepository.getOne(newsId));
         return "index";
     }
 
     @PostMapping("/editor/changeNews/{newsId}")
-    public String changeAfficheSave(@PathVariable Long newsId, @ModelAttribute("affiche") News news, BindingResult bindingResult, Model model) {
+    public String changeNewsSave(@PathVariable Long newsId, @ModelAttribute("news") News news, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             model.addAttribute("error", true);
             return "changeNews";
@@ -91,7 +91,7 @@ public class NewsController {
             return "changeNews";
         }
 
-        return "redirect:/affiche/" + newsId;
+        return "redirect:/news/" + newsId;
     }
 
 

@@ -2,6 +2,7 @@ package com.culture_news.service;
 
 import com.culture_news.entity.Category;
 import com.culture_news.entity.News;
+import com.culture_news.entity.Persons;
 import com.culture_news.entity.Place;
 import com.culture_news.repositories.CategoryRepository;
 import com.culture_news.repositories.PlaceRepository;
@@ -38,6 +39,20 @@ public class PlaceService {
 
         place.setPlaceCategory(categoryRepository.findByName(category.getName()));
         placeRepository.save(place);
+        return true;
+    }
+
+    @Transactional
+    public boolean savePlaceChange(Place place, Long placeId) {
+        em.createQuery("UPDATE Place SET address = :newAddress, description = :newDesc, email = :newEmail, phoneNumber = :newPhone, picture = :newPicture, placeName = :newName WHERE placeId = :id")
+                .setParameter("newName", place.getPlaceName())
+                .setParameter("newPicture", place.getPicture())
+                .setParameter("newDesc", place.getDescription())
+                .setParameter("newEmail", place.getEmail())
+                .setParameter("newAddress", place.getAddress())
+                .setParameter("newPhone", place.getPhoneNumber())
+                .setParameter("id", placeId)
+                .executeUpdate();
         return true;
     }
 

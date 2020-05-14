@@ -2,6 +2,7 @@ package com.culture_news.controller;
 
 import com.culture_news.entity.User;
 import com.culture_news.repositories.UserRepository;
+import com.culture_news.repositories.UsersRolesRepository;
 import com.culture_news.service.NewsService;
 import com.culture_news.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,8 @@ public class UserController {
     private UserRepository userRepository;
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private UsersRolesRepository usersRolesRepository;
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -68,11 +71,30 @@ public class UserController {
         model.addAttribute("users", userRepository.findAll());
         return "admin";
     }
-    @PostMapping("/admin/addrole/{userId}")
+    @PostMapping("/admin/addRole/{userId}")
     public String adminSetUserRole(Model model, @PathVariable Long userId){
-        userService.addRoleUser(userId);
-        model.addAttribute("users", userRepository.findAll());
-        return "admin";
+        if(!userService.addRoleUser(userId)){
+            model.addAttribute("error", true);
+            model.addAttribute("users", userRepository.findAll());
+            return "admin";
+        }
+        else {
+            userService.addRoleUser(userId);
+            model.addAttribute("users", userRepository.findAll());
+            return "admin";
+        }
+    }
+    @PostMapping("/admin/deleteRole/{userId}")
+    public String adminDeleteUserRole(Model model, @PathVariable Long userId){
+        if(userService.deleteRoleUser(userId)){
+            model.addAttribute("users", userRepository.findAll());
+            return "admin";
+        }
+        else {
+            model.addAttribute("error", true);
+            model.addAttribute("users", userRepository.findAll());
+            return "admin";
+        }
     }
 
     @GetMapping("/user/selfProfile")

@@ -120,8 +120,21 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
-    public void addRoleUser(Long userId) {
-        usersRolesRepository.save(new UsersRoles(userId, 2L));
+    @Transactional
+    public boolean addRoleUser(Long userId) {
+        if (usersRolesRepository.findByUserIdAndRoleId(userId, 2L) != null) {
+            return false;
+        }
+        userRepository.getOne(userId).getRoles().add(new Role(2L, "ROLE_EDITOR"));
+        return true;
+    }
+    @Transactional
+    public boolean deleteRoleUser(Long userId) {
+        if (usersRolesRepository.findByUserIdAndRoleId(userId, 2L) != null) {
+            em.createQuery("DELETE FROM UsersRoles WHERE userId = :id AND roleId = 2").setParameter("id", userId).executeUpdate();
+            return true;
+        }
+        return false;
     }
 
 }
