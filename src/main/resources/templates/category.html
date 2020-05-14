@@ -38,7 +38,7 @@
                 <span id="place-adress" class="news-text" th:text="${place.address}">адрес</span>
                 <br>
                 <label for="category-name"> Категория: </label>
-                <span id="category-name" class="news-category"  th:each = "categories:${place.placeCategory}" th:text="${categories.name}">Категория</span>
+                <span id="category-name" class="news-category" th:text="${place.placeCategory.name}">Категория</span>
                 <br>
                 <label for="place-email"> Электронная почта: </label>
                 <span id="place-email" class="news-text" th:text="${place.email}">электронная почта</span>

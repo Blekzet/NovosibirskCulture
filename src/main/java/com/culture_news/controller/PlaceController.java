@@ -42,7 +42,7 @@ public class PlaceController {
     @GetMapping("/editor/deletePlace/{placeId}")
     public String deletePerson(@PathVariable Long placeId, Model model) {
         placeService.deletePlace(placeRepository.getOne(placeId));
-        return "/";
+        return "index";
     }
 
     @PostMapping("/editor/addplace")
@@ -62,8 +62,6 @@ public class PlaceController {
 
     public Model setPlaceList(Long placeId, Model model){
         model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("comments", commentsRepository.findByPlaceId(placeId));
-        model.addAttribute("saveComment", new Comments());
         model.addAttribute("place", placeRepository.getOne(placeId));
         return model;
     }

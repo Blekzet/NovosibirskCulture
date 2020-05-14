@@ -39,8 +39,8 @@ public class News {
     @Column(name = "picture")
     private String picture;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Category> newsCategory;
+    @ManyToOne
+    private Category newsCategory;
 
     public News() {
     }
@@ -84,6 +84,9 @@ public class News {
     public void setCommentsCount(Long commentsCount) {
         this.commentsCount += commentsCount;
     }
+    public void setStartCommentsCount(Long commentsCount) {
+        this.commentsCount = commentsCount;
+    }
 
     public String getDate() {
         return date;
@@ -109,11 +112,11 @@ public class News {
         this.picture = picture;
     }
 
-    public Set<Category> getNewsCategory() {
+    public Category getNewsCategory() {
         return newsCategory;
     }
 
-    public void setNewsCategory(Set<Category> newsCategory) {
+    public void setNewsCategory(Category newsCategory) {
         this.newsCategory = newsCategory;
     }
 }

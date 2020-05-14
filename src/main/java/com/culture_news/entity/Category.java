@@ -15,8 +15,11 @@ public class Category {
     private String description;
 
     @Transient
-    @ManyToMany(mappedBy = "category")
+    @OneToMany(mappedBy="category")
     private Set<News> newsCategory;
+    @Transient
+    @OneToMany(mappedBy="category")
+    private Set<Place> placeCategory;
 
     
     public Category() {
@@ -58,4 +61,11 @@ public class Category {
         this.newsCategory = newsCategory;
     }
 
+    public Set<Place> getPlaceCategory() {
+        return placeCategory;
+    }
+
+    public void setPlaceCategory(Set<Place> placeCategory) {
+        this.placeCategory = placeCategory;
+    }
 }

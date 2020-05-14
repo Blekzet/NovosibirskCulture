@@ -54,7 +54,7 @@ public class PersonController {
     @GetMapping("/editor/deletePeson/{personId}")
     public String deletePerson(@PathVariable Long personId, Model model) {
         personService.deletePerson(personsRepository.getOne(personId));
-        return "/";
+        return "index";
     }
 
     @GetMapping("/personlist")
@@ -66,7 +66,6 @@ public class PersonController {
     @GetMapping("/person/{personId}")
     public String personPage(Model model, @PathVariable Long personId){
         model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("comments", commentsRepository.findByPersonId(personId));
         model.addAttribute("saveComment", new Comments());
         model.addAttribute("person", personsRepository.getOne(personId));
         return "person";

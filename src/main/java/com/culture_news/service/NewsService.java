@@ -65,7 +65,8 @@ public class NewsService{
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         news.setDate(formatter.format(date));
-        news.setNewsCategory(Collections.singleton(categoryRepository.findByName(category.getName())));
+        news.setNewsCategory(categoryRepository.findByName(category.getName()));
+        news.setStartCommentsCount(0L);
         newsRepository.save(news);
 
         return true;
@@ -73,7 +74,6 @@ public class NewsService{
 
     @Transactional
     public boolean deleteNews(News news) {
-        em.createQuery("DELETE FROM NewsCategory WHERE newsId = :id").setParameter("id", news.getNewsId()).executeUpdate();
         newsRepository.delete(news);
         return true;
     }

@@ -55,8 +55,12 @@ public class Affiche {
         return commentCount;
     }
 
-    public void setCommentCount(Long commentId) {
-        this.commentCount += commentId;
+    public void setCommentCount(Long commentCount) {
+        this.commentCount += commentCount;
+    }
+
+    public void setStartCommentsCount(Long commentsCount) {
+        this.commentCount = commentsCount;
     }
 
     public String getPicture() {

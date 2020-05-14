@@ -25,8 +25,8 @@ public class Place {
     @Column(name = "picture")
     private String picture;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    private Set<Category> placeCategory;
+    @ManyToOne
+    private Category placeCategory;
 
     public Place() {
     }
@@ -95,11 +95,11 @@ public class Place {
         this.picture = picture;
     }
 
-    public Set<Category> getPlaceCategory() {
+    public Category getPlaceCategory() {
         return placeCategory;
     }
 
-    public void setPlaceCategory(Set<Category> placeCategory) {
+    public void setPlaceCategory(Category placeCategory) {
         this.placeCategory = placeCategory;
     }
 }

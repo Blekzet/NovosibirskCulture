@@ -24,6 +24,7 @@ public class AfficheService {
             return false;
         }
 
+        affiche.setStartCommentsCount(0L);
         afficheRepository.save(affiche);
         return true;
     }

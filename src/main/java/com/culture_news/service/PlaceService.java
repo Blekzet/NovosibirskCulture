@@ -36,7 +36,7 @@ public class PlaceService {
             return false;
         }
 
-        place.setPlaceCategory(Collections.singleton(categoryRepository.findByName(category.getName())));
+        place.setPlaceCategory(categoryRepository.findByName(category.getName()));
         placeRepository.save(place);
         return true;
     }
@@ -47,7 +47,6 @@ public class PlaceService {
 
     @Transactional
     public boolean deletePlace(Place place) {
-        em.createQuery("DELETE FROM PlaceCategory WHERE placeId = :id").setParameter("id", place.getPlaceId()).executeUpdate();
         placeRepository.delete(place);
         return true;
     }

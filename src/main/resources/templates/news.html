@@ -36,7 +36,7 @@
                 Дата публикации:<span class="news-date news-meta-child" th:text="${news.date}">Дата публикации</span>
             </div>
             <div>
-                Категория:<span class="news-category news-meta-child"  th:each = "categories:${news.newsCategory}" th:text="${categories.name}">Категория</span>
+                Категория:<span class="news-category news-meta-child"   th:text="${news.newsCategory.name}">Категория</span>
             </div>
             <div>
                 Коментарии:<a href="" class="comment-counter news-meta-child" th:text="${news.commentsCount}">Количество комментариев</a>

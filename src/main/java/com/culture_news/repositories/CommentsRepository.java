@@ -9,7 +9,5 @@ import java.util.List;
 @Repository
 public interface CommentsRepository extends JpaRepository<Comments, Long> {
     public List<Comments> findByNewsId(Long newsId);
-    public List<Comments> findByPlaceId(Long placeId);
     public List<Comments> findByAfficheId(Long afficheId);
-    public List<Comments> findByPersonId(Long personId);
 }
