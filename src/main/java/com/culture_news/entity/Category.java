@@ -9,10 +9,12 @@ import java.util.Set;
 public class Category {
     @Id
     private Long categoryId;
-
+    @Column(name = "name")
     private String name;
-
+    @Column(name = "description")
     private String description;
+    @Column(name = "eng_name")
+    private String engName;
 
     @Transient
     @OneToMany(mappedBy="category")
@@ -67,5 +69,13 @@ public class Category {
 
     public void setPlaceCategory(Set<Place> placeCategory) {
         this.placeCategory = placeCategory;
+    }
+
+    public String getEngName() {
+        return engName;
+    }
+
+    public void setEngName(String engName) {
+        this.engName = engName;
     }
 }

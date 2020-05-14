@@ -54,10 +54,9 @@ public class HomeController {
             model.addAttribute("newsList", newsRepository.findAll(PageRequest.of(page, size)));
         }
         else{
-            model.addAttribute("newsList", newsRepository.findByNewsCategory(category.getName(), PageRequest.of(page, size)));
+            return "redirect:/categoryNews/" + categoryRepository.findByName(category.getName()).getEngName() + "/";
         }
 
-        model.addAttribute("category", category);
         model.addAttribute("sidebarData", newsService.fourNewsList());
         return "index";
     }

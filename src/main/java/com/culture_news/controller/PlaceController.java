@@ -1,14 +1,15 @@
 package com.culture_news.controller;
 
-import com.culture_news.entity.Category;
-import com.culture_news.entity.Comments;
-import com.culture_news.entity.Persons;
-import com.culture_news.entity.Place;
+import com.culture_news.entity.*;
+import com.culture_news.repositories.CategoryRepository;
 import com.culture_news.repositories.CommentsRepository;
+import com.culture_news.repositories.NewsRepository;
 import com.culture_news.repositories.PlaceRepository;
 import com.culture_news.service.NewsService;
 import com.culture_news.service.PlaceService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -17,20 +18,24 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.servlet.http.HttpServletRequest;
+
 @Controller
 public class PlaceController {
 
     @Autowired
     private NewsService newsService;
+    @Autowired
+    private NewsRepository newsRepository;
 
     @Autowired
     private PlaceRepository placeRepository;
 
     @Autowired
-    private PlaceService placeService;
+    private CategoryRepository categoryRepository;
 
     @Autowired
-    private CommentsRepository commentsRepository;
+    private PlaceService placeService;
 
     @GetMapping("/editor/addplace")
     public String placePage(Model model) {
@@ -90,11 +95,13 @@ public class PlaceController {
         return model;
     }
 
-    @GetMapping("/music")
-    public String musicPage(Model model){
+    @GetMapping("/{categoryName}")
+    public String musicPage(@PathVariable String categoryName, Model model){
+        Category category = categoryRepository.findByEngName(categoryName);
+
         model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("places", placeService.categoryPlace("Музыка"));
-        model.addAttribute("category", "music");
+        model.addAttribute(category.getName(), placeService.categoryPlace(category.getName()));
+        model.addAttribute("category", category.getName());
         return "categorylist";
     }
     @GetMapping("/music/{placeId}")
@@ -102,42 +109,33 @@ public class PlaceController {
         model = setPlaceList(placeId, model);
         return "category";
     }
-    @GetMapping("/museums")
-    public String museumPage(Model model){
-        model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("places", placeService.categoryPlace("Музеи"));
-        model.addAttribute("category", "museums");
-        return "categorylist";
 
-    }
-    @GetMapping("/museums/{placeId}")
-    public String museumList(@PathVariable Long placeId, Model model) {
-        model = setPlaceList(placeId, model);
-        return "category";
-    }
-    @GetMapping("/cinema")
-    public String cinemaPage(Model model){
+    @GetMapping("categoryNews/{category}/")
+    public String categoryNewsPage(@PathVariable String category, Model model, HttpServletRequest request){
+        int page = 0;
+        int size = 12;
+
+        Category currentCategory = categoryRepository.findByEngName(category);
+
+        if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+            page = Integer.parseInt(request.getParameter("page")) - 1;
+        }
+
+        model.addAttribute("newsList", newsRepository.findByNewsCategory(currentCategory.getName(), PageRequest.of(page, size)));
         model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("places", placeService.categoryPlace("Кино"));
-        model.addAttribute("category", "cinema");
-        return "categorylist";
+        return "categoryNews";
     }
-    @GetMapping("/cinema/{placeId}")
-    public String cinemaList(@PathVariable Long placeId, Model model) {
-        model = setPlaceList(placeId, model);
-        return "category";
-    }
-    @GetMapping("/theaters")
-    public String theatersPage(Model model) {
+
+    @PostMapping("categoryNews/{category}/")
+    public String rootCategoryChange(@PathVariable String category, Model model){
+        int page = 0;
+        int size = 12;
+
+        Category currentCategory = categoryRepository.findByEngName(category);
+
+        model.addAttribute("newsList", newsRepository.findByNewsCategory(currentCategory.getName(), PageRequest.of(page, size)));
         model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute("places", placeService.categoryPlace("Театры"));
-        model.addAttribute("category", "theaters");
-        return "categorylist";
-    }
-    @GetMapping("/theaters/{placeId}")
-    public String theatersList(@PathVariable Long placeId, Model model) {
-        model = setPlaceList(placeId, model);
-        return "category";
+        return "categoryNews";
     }
 
 }
