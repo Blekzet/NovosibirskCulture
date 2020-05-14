@@ -39,6 +39,12 @@ public class PlaceController {
         return "addplace";
     }
 
+    @GetMapping("/editor/deletePlace/{placeId}")
+    public String deletePerson(@PathVariable Long placeId, Model model) {
+        placeService.deletePlace(placeRepository.getOne(placeId));
+        return "/";
+    }
+
     @PostMapping("/editor/addplace")
     public String addPlace(@ModelAttribute("place") Place place, @ModelAttribute("category") Category category, BindingResult bindingResult, Model model) {
 

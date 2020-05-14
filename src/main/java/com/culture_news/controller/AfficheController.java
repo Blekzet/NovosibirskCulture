@@ -33,6 +33,12 @@ public class AfficheController {
         return "addaffiche";
     }
 
+    @GetMapping("/editor/deleteAffiche/{afficheId}")
+    public String deletePerson(@PathVariable Long afficheId, Model model) {
+        afficheService.deleteAffiche(afficheRepository.getOne(afficheId));
+        return "/";
+    }
+
     @PostMapping("/editor/addaffiche")
     public String addAffiche(@ModelAttribute("affiche") Affiche affiche, BindingResult bindingResult, Model model) {
 

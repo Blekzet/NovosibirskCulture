@@ -48,4 +48,10 @@ public class AfficheService {
         return true;
     }
 
+    @Transactional
+    public boolean deleteAffiche(Affiche affiche) {
+        afficheRepository.delete(affiche);
+        return true;
+    }
+
 }

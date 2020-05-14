@@ -19,18 +19,11 @@ public class Comments {
     @Column(name = "user_name")
     private String userName;
 
-    @Column(name = "user_id")
-    private Long userId;
-
     @Column(name = "text")
     private String text;
 
     @Column(name = "news_id")
     private Long newsId;
-    @Column(name = "place_id")
-    private Long placeId;
-    @Column(name = "person_id")
-    private Long personId;
     @Column(name = "affiche_id")
     private Long afficheId;
 
@@ -61,22 +54,6 @@ public class Comments {
         this.newsId = newsId;
     }
 
-    public Long getPlaceId() {
-        return placeId;
-    }
-
-    public void setPlaceId(Long placeId) {
-        this.placeId = placeId;
-    }
-
-    public Long getPersonId() {
-        return personId;
-    }
-
-    public void setPersonId(Long personId) {
-        this.personId = personId;
-    }
-
     public Long getAfficheId() {
         return afficheId;
     }
@@ -93,11 +70,4 @@ public class Comments {
         this.userName = userName;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 }

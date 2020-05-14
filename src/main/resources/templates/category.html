@@ -55,6 +55,9 @@
             <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/changePlace/' + ${place.placeId}}">
                 Редактировать место
             </a>
+            <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/deletePlace/' + ${place.placeId}}">
+                Удалить место
+            </a>
         </div>
     </div>
 </div>

@@ -82,9 +82,9 @@ public class UserController {
         return "selfProfile";
     }
 
-    @GetMapping("/user/profile/{userId}")
-    public String profilePage(Model model, @PathVariable Long userId){
-        model.addAttribute("user", userService.findUserById(userId));
+    @GetMapping("/user/profile/{userName}")
+    public String profilePage(Model model, @PathVariable String userName){
+        model.addAttribute("user", userRepository.findByUserName(userName));
         model.addAttribute("sidebarData", newsService.fourNewsList());
         return "profile";
     }

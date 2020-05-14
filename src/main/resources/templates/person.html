@@ -49,6 +49,9 @@
             <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/changePerson/' + ${person.personId}}">
                 Редактировать персону
             </a>
+            <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/deletePerson/' + ${person.personId}}">
+                Удалить персону
+            </a>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 package com.culture_news.service;
 
+import com.culture_news.entity.Affiche;
 import com.culture_news.entity.Persons;
 import com.culture_news.repositories.PersonsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,12 @@ public class PersonService {
             return false;
         }
         personsRepository.save(person);
+        return true;
+    }
+
+    @Transactional
+    public boolean deletePerson(Persons person) {
+        personsRepository.delete(person);
         return true;
     }
 }

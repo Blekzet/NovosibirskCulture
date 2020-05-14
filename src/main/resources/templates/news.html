@@ -42,6 +42,7 @@
                 Коментарии:<a href="" class="comment-counter news-meta-child" th:text="${news.commentsCount}">Количество комментариев</a>
             </div>
         </div>
+
         <div class="news-inner">
             <img class="news-img" th:src = "@{${news.picture}}">
 
@@ -51,13 +52,16 @@
             <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/changeNews/' + ${news.newsId}}">
                 Редактировать новость
             </a>
+            <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/deleteNews/' + ${news.newsId}}">
+                Удалить новость
+            </a>
         </div>
 
         <div class="comments-container" >
             <label class="comments-title">Комментарии: </label>
             <ul class="comments-wrapper">
                 <li class="comments-elem" th:each = "comment:${comments}">
-                    <label> <a th:href="@{'/user/profile/' + ${comment.userId}}" th:text="${comment.userName}">Пользователь</a></label>
+                    <label> <a th:href="@{'/user/profile/' + ${comment.userName}}" th:text="${comment.userName}">Пользователь</a></label>
                     <p th:text="${comment.text}">Коментарий пользователя</p>
                 </li>
             </ul>
@@ -70,6 +74,7 @@
                     <button type="submit" class="btn btn-outline-success my-2 my-sm-0 category-btn">Применить</button>
             </form>
         </div>
+
 
     </div>
 </div>

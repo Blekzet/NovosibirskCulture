@@ -73,6 +73,12 @@ public class NewsController {
         return "changeNews";
     }
 
+    @GetMapping("/editor/deleteNews/{newsId}")
+    public String deleteAffiche(@PathVariable Long newsId, Model model) {
+        newsService.deleteNews(newsRepository.getOne(newsId));
+        return "/";
+    }
+
     @PostMapping("/editor/changeNews/{newsId}")
     public String changeAfficheSave(@PathVariable Long newsId, @ModelAttribute("affiche") News news, BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {

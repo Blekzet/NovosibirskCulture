@@ -51,6 +51,12 @@ public class PersonController {
         return "addperson";
     }
 
+    @GetMapping("/editor/deletePeson/{personId}")
+    public String deletePerson(@PathVariable Long personId, Model model) {
+        personService.deletePerson(personsRepository.getOne(personId));
+        return "/";
+    }
+
     @GetMapping("/personlist")
     public String personListPage(Model model){
         model.addAttribute("sidebarData", newsService.fourNewsList());

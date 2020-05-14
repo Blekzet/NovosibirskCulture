@@ -1,6 +1,7 @@
 package com.culture_news.service;
 
 import com.culture_news.entity.Category;
+import com.culture_news.entity.News;
 import com.culture_news.entity.Place;
 import com.culture_news.repositories.CategoryRepository;
 import com.culture_news.repositories.PlaceRepository;
@@ -42,5 +43,12 @@ public class PlaceService {
 
     public List<Place> categoryPlace(String name){
         return em.createQuery("SELECT place FROM Place place JOIN place.placeCategory category where category.name = '" + name + "'", Place.class).getResultList();
+    }
+
+    @Transactional
+    public boolean deletePlace(Place place) {
+        em.createQuery("DELETE FROM PlaceCategory WHERE placeId = :id").setParameter("id", place.getPlaceId()).executeUpdate();
+        placeRepository.delete(place);
+        return true;
     }
 }

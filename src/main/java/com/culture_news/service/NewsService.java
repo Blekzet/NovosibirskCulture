@@ -71,6 +71,12 @@ public class NewsService{
         return true;
     }
 
+    @Transactional
+    public boolean deleteNews(News news) {
+        em.createQuery("DELETE FROM NewsCategory WHERE newsId = :id").setParameter("id", news.getNewsId()).executeUpdate();
+        newsRepository.delete(news);
+        return true;
+    }
     public List<News> fourNewsList() {
         return em.createQuery("SELECT n FROM News n order by n.date desc", News.class).setMaxResults(4).getResultList();
     }

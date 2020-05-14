@@ -43,7 +43,10 @@
                 описание афиши
             </p>
             <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/changeAffiche/' + ${affiche.afficheId}}">
-            Редактировать Афишу
+            Редактировать афишу
+            </a>
+            <a sec:authorize="hasRole('ROLE_EDITOR')" th:href="@{'/editor/deleteAffiche/' + ${affiche.afficheId}}">
+                Удалить афишу
             </a>
         </div>
 
