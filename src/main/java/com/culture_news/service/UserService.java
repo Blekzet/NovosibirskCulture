@@ -49,17 +49,11 @@ public class UserService implements UserDetailsService {
 
     @Transactional
     public boolean changeUser(User user, User oldUser) {
-        em.createQuery("UPDATE User SET firstName = :newFirstName WHERE firstName = :oldFirstName")
+        em.createQuery("UPDATE User SET firstName = :newFirstName, lastName = :newLastName, email = :newEmail WHERE userId = :id")
                 .setParameter("newFirstName" , user.getFirstName())
-                .setParameter("oldFirstName" , oldUser.getFirstName())
-                .executeUpdate();
-        em.createQuery("UPDATE User SET lastName= :newLastName WHERE lastName = :oldLastName")
                 .setParameter("newLastName",user.getLastName())
-                .setParameter("oldLastName",oldUser.getLastName())
-                .executeUpdate();
-        em.createQuery("UPDATE User SET email= :newEmail WHERE email = :oldEmail")
                 .setParameter("newEmail",user.getEmail())
-                .setParameter("oldEmail",oldUser.getEmail())
+                .setParameter("id",oldUser.getUserId())
                 .executeUpdate();
         return true;
     }
@@ -73,9 +67,8 @@ public class UserService implements UserDetailsService {
     }
     @Transactional
     public boolean changeUserAvatar(User user, User oldUser) {
-        em.createQuery("UPDATE User SET avatar = :newAvatar WHERE avatar = :oldAvatar and userId = :id")
+        em.createQuery("UPDATE User SET avatar = :newAvatar WHERE userId = :id")
                 .setParameter("newAvatar" , user.getAvatar())
-                .setParameter("oldAvatar" , oldUser.getAvatar())
                 .setParameter("id" , oldUser.getUserId())
                 .executeUpdate();
         return true;
