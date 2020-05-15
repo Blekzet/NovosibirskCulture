@@ -96,7 +96,7 @@ public class PlaceController {
     }
 
     @GetMapping("/{categoryName}")
-    public String musicPage(@PathVariable String categoryName, Model model){
+    public String categoryList(@PathVariable String categoryName, Model model){
         Category category = categoryRepository.findByEngName(categoryName);
 
         model.addAttribute("sidebarData", newsService.fourNewsList());
@@ -104,8 +104,23 @@ public class PlaceController {
         model.addAttribute("category", category.getEngName());
         return "categorylist";
     }
-    @GetMapping("/{categoryName}/{placeId}")
-    public String musicList(@PathVariable Long placeId, Model model) {
+    @GetMapping("/music/{placeId}")
+        public String musicPage(@PathVariable Long placeId, Model model) {
+        model = setPlaceList(placeId, model);
+        return "category";
+    }
+    @GetMapping("/theaters/{placeId}")
+    public String theatersPage(@PathVariable Long placeId, Model model) {
+        model = setPlaceList(placeId, model);
+        return "category";
+    }
+    @GetMapping("/museums/{placeId}")
+    public String museumsPage(@PathVariable Long placeId, Model model) {
+        model = setPlaceList(placeId, model);
+        return "category";
+    }
+    @GetMapping("/cinema/{placeId}")
+    public String cinemaPage(@PathVariable Long placeId, Model model) {
         model = setPlaceList(placeId, model);
         return "category";
     }
