@@ -101,7 +101,7 @@ public class PlaceController {
 
         model.addAttribute("sidebarData", newsService.fourNewsList());
         model.addAttribute("places", placeService.categoryPlace(category.getName()));
-        model.addAttribute("category", category.getName());
+        model.addAttribute("category", category.getEngName());
         return "categorylist";
     }
     @GetMapping("/{categoryName}/{placeId}")
