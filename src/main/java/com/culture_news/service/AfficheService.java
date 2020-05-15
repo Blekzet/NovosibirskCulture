@@ -1,13 +1,16 @@
 package com.culture_news.service;
 
 import com.culture_news.entity.Affiche;
+import com.culture_news.entity.Comments;
 import com.culture_news.repositories.AfficheRepository;
+import com.culture_news.repositories.CommentsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class AfficheService {
@@ -16,6 +19,8 @@ public class AfficheService {
     private EntityManager em;
     @Autowired
     private AfficheRepository afficheRepository;
+    @Autowired
+    private CommentsRepository commentsRepository;
 
 
     @Transactional
@@ -51,6 +56,8 @@ public class AfficheService {
 
     @Transactional
     public boolean deleteAffiche(Affiche affiche) {
+        List<Comments> comments = commentsRepository.findByAfficheId(affiche.getAfficheId());
+        comments.forEach((comment) -> {commentsRepository.delete(comment);});
         afficheRepository.delete(affiche);
         return true;
     }

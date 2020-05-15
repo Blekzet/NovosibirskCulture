@@ -2,8 +2,10 @@ package com.culture_news.service;
 
 import com.culture_news.entity.Affiche;
 import com.culture_news.entity.Category;
+import com.culture_news.entity.Comments;
 import com.culture_news.entity.News;
 import com.culture_news.repositories.CategoryRepository;
+import com.culture_news.repositories.CommentsRepository;
 import com.culture_news.repositories.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +29,9 @@ public class NewsService{
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private CommentsRepository commentsRepository;
 
 
     @Transactional
@@ -74,6 +79,8 @@ public class NewsService{
 
     @Transactional
     public boolean deleteNews(News news) {
+        List<Comments> comments = commentsRepository.findByNewsId(news.getNewsId());
+        comments.forEach((comment) -> {commentsRepository.delete(comment);});
         newsRepository.delete(news);
         return true;
     }
