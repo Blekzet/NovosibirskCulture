@@ -55,15 +55,19 @@
                      </form>
 
                  </div>
-                 <ul class="news-block" th:each="news: ${newsList}">
-                     <li>
-                         <a th:href="@{'/news/' + ${news.newsId}}"> <img th:src = "@{${news.picture}}" width="150" > </a>
-                         <div class="post-title">
-                            <a th:href="@{'/news/' + ${news.newsId}}" th:text="${news.title}"> Название новости</a>
+                 <div class="news-list">
+                     <div class="row">
+                         <div class="column news" th:each="news: ${newsList}">
+                             <div class="content">
+                                 <a th:href="@{'/news/' + ${news.newsId}}"> <img th:src = "@{${news.picture}}" style="width:100%" > </a>
+                                 <div class="post-title">
+                                     <a th:href="@{'/news/' + ${news.newsId}}" th:text="${news.title}"> Название новости</a>
+                                 </div>
+                                 <p class="post-desc" th:text="${news.shortDescription}"> Краткое описание новости</p>
+                             </div>
                          </div>
-                         <p class="post-desc" th:text="${news.shortDescription}"> Краткое описание новости</p>
-                     </li>
-                 </ul>
+                     </div>
+                 </div>
              </div>
     <nav class="page-panel" >
         <ul class="pagination justify-content-center font-weight-bold" th:object="${category}">
