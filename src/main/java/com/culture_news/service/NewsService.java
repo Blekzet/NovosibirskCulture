@@ -68,7 +68,7 @@ public class NewsService{
         }
 
         Date date = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd MM yyyy, k:m");
         news.setDate(formatter.format(date));
         news.setNewsCategory(categoryRepository.findByName(category.getName()));
         news.setStartCommentsCount(0L);
