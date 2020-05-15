@@ -41,34 +41,4 @@
             </li>
         </ul>
     </div>
-    <div class="sidebar">
-        <h1 class="sidebar-title">Календарь событий</h1>
-        <form action="#" th:action="@{/pickdate}" method="POST">
-            <div class="form-group row">
-                <div class="col-md-4 mt-5">
-                    <div class="input-group date">
-                        <input type="text" class="form-control" autocomplete="off" th:object="*{date}"/>
-                        <div class="input-group-append">
-                            <span class="input-group-text"><i class="far fa-calendar-alt"></i></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <button class="btn btn-primary" type="submit">Поиск событий</button>
-        </form>
-    </div>
-
-    <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
-    <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{assets/bootstrap-datepicker/js/bootstrap-datepicker.js}"></script>
-
-    <script>
-        $('.input-group.date').datepicker({
-            autoclose: true,
-            todayHighlight: true
-        });
-    </script>
-
 </aside>

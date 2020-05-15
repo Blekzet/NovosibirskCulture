@@ -1,6 +1,9 @@
 package com.culture_news.entity;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 import java.util.Set;
 
 @Entity
@@ -19,6 +22,10 @@ public class Affiche {
 
     @Column(name = "comment_count")
     private Long  commentCount;
+
+    @Column(name = "date")
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date date;
 
     @Column(name = "picture")
     private String picture;
@@ -77,5 +84,13 @@ public class Affiche {
 
     public void setShortDescription(String shortDescription) {
         this.shortDescription = shortDescription;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
