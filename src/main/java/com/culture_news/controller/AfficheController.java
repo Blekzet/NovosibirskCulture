@@ -60,6 +60,14 @@ public class AfficheController {
     public String afficheList(Model model) {
         model.addAttribute("sidebarData", newsService.fourNewsList());
         model.addAttribute("afficheList", afficheRepository.findAll());
+        model.addAttribute("afficheDate", new Affiche());
+        return "affichelist";
+    }
+
+    @PostMapping("/datepick")
+    public String afficheByDateList(@ModelAttribute("afficheDate") Affiche afficheDate, Model model) {
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("afficheList", afficheRepository.findByDate(afficheDate.getDate()));
         return "affichelist";
     }
 

@@ -11,12 +11,17 @@
 <nav th:replace="fragments/menu">
 </nav>
 
-
-
 <div class="container">
     <aside th:replace="fragments/aside:: sidebar(sidebarData=${sidebarData})"> </aside>
-
     <div class="news-container">
+        <div class="select-block">
+            <form th:action="@{/datepick}" method="post" th:object="${afficheDate}">
+                <h1 class="select-title"> Выберите дату</h1>
+                <button type="submit" class="btn btn-outline-success my-2 my-sm-0 category-btn">Применить</button>
+                <input type="date" class="form-control custom-input w-25" th:field = "*{date}"/>
+            </form>
+        </div>
+
         <ul class="news-block" th:each = "affiche:${afficheList}">
             <li ><a th:href="@{'/affiche/' + ${affiche.afficheId}}"> <img  th:src = "@{${affiche.picture}}" ></a><p></p>
                 <div class="post-title">
@@ -26,7 +31,10 @@
             </li>
         </ul>
     </div>
+
 </div>
+
+
 
 
 

@@ -325,3 +325,6 @@ footer {
 .avatar-img{
     width: 600px;
 }
+.custom-input{
+    float:right;
+}
