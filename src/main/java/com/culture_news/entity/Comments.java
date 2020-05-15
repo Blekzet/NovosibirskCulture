@@ -22,6 +22,9 @@ public class Comments {
     @Column(name = "text")
     private String text;
 
+    @Column(name = "user_id")
+    private Long userId;
+
     @Column(name = "news_id")
     private Long newsId;
     @Column(name = "affiche_id")
@@ -70,4 +73,11 @@ public class Comments {
         this.userName = userName;
     }
 
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
 }

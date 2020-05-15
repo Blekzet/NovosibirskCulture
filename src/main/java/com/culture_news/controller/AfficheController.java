@@ -95,5 +95,12 @@ public class AfficheController {
         return "redirect:/affiche/" + afficheId;
     }
 
+    @PostMapping("/pickdate")
+    public String findAfficheByDate(@ModelAttribute("date") String date, BindingResult bindingResult, Model model) {
+        model.addAttribute("sidebarData", newsService.fourNewsList());
+        model.addAttribute("afficheList", afficheRepository);
+        return "affichelist";
+    }
+
 
 }

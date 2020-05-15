@@ -32,6 +32,7 @@ public class CommentsController {
         comment.setNewsId(newsId);
         newsRepository.getOne(newsId).setCommentsCount(1L);
         User user = userRepository.findByUserName(principal.getName());
+        comment.setUserId(user.getUserId());
         comment.setUserName(user.getUserName());
         commentsRepository.save(comment);
         return "redirect:" + request.getHeader("referer");
@@ -41,8 +42,21 @@ public class CommentsController {
         comment.setAfficheId(afficheId);
         afficheRepository.getOne(afficheId).setCommentCount(1L);
         User user = userRepository.findByUserName(principal.getName());
+        comment.setUserId(user.getUserId());
         comment.setUserName(user.getUserName());
         commentsRepository.save(comment);
+        return "redirect:" + request.getHeader("referer");
+    }
+    @GetMapping("/comment/delete/affiche/{afficheId}/{commentId}")
+    public String deleteAfficheComment(@PathVariable Long commentId,@PathVariable Long afficheId, Model model, HttpServletRequest request, Principal principal){
+        afficheRepository.getOne(afficheId).setCommentCount(-1L);
+        commentsRepository.deleteById(commentId);
+        return "redirect:" + request.getHeader("referer");
+    }
+    @GetMapping("/comment/delete/news/{newsId}/{commentId}")
+    public String deleteNewsComment(@PathVariable Long commentId, @PathVariable Long newsId, Model model, HttpServletRequest request, Principal principal){
+        newsRepository.getOne(newsId).setCommentsCount(-1L);
+        commentsRepository.deleteById(commentId);
         return "redirect:" + request.getHeader("referer");
     }
 }
