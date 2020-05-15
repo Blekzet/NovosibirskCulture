@@ -39,7 +39,7 @@ public class HomeController {
             page = Integer.parseInt(request.getParameter("page")) - 1;
         }
         model.addAttribute("topNews", newsService.threeNewsList());
-        model.addAttribute("newsList", newsRepository.findAll(PageRequest.of(page, size)));
+        model.addAttribute("newsList", newsRepository.findAllByOrderByDateDesc(PageRequest.of(page, size)));
         model.addAttribute("category", new Category());
         model.addAttribute("sidebarData", newsService.fourNewsList());
         return "index";
@@ -51,7 +51,7 @@ public class HomeController {
         int size = 12;
 
         if(category.getName().equals("All")){
-            model.addAttribute("newsList", newsRepository.findAll(PageRequest.of(page, size)));
+            model.addAttribute("newsList", newsRepository.findAllByOrderByDateDesc(PageRequest.of(page, size)));
         }
         else{
             return "redirect:/categoryNews/" + categoryRepository.findByName(category.getName()).getEngName() + "/";

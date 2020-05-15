@@ -15,6 +15,7 @@ import java.util.List;
 public interface NewsRepository extends JpaRepository<News, Long> {
     public News findByTitle(String title);
     public News findByFullDescription(String fullDescription);
+    public Page<News> findAllByOrderByDateDesc(Pageable pageable);
 
     @Query("SELECT news FROM News news JOIN news.newsCategory category where category.name = :categoryName")
     Page<News> findByNewsCategory(@Param("categoryName") String categoryName, Pageable pageable);
