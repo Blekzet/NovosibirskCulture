@@ -24,7 +24,7 @@ public class Affiche {
     private Long  commentCount;
 
     @Column(name = "date")
-    @DateTimeFormat(pattern = "yyyy-mm-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date date;
 
     @Column(name = "picture")

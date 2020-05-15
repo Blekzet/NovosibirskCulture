@@ -33,9 +33,6 @@ public class News {
     @Column(name = "date")
     private String date;
 
-    @Column(name = "comment_id")
-    private Long commentId;
-
     @Column(name = "picture")
     private String picture;
 
@@ -94,14 +91,6 @@ public class News {
 
     public void setDate(String date) {
         this.date = date;
-    }
-
-    public Long getCommentId() {
-        return commentId;
-    }
-
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
     }
 
     public String getPicture() {

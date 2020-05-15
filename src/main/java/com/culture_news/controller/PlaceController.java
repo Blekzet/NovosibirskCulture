@@ -100,11 +100,11 @@ public class PlaceController {
         Category category = categoryRepository.findByEngName(categoryName);
 
         model.addAttribute("sidebarData", newsService.fourNewsList());
-        model.addAttribute(category.getName(), placeService.categoryPlace(category.getName()));
+        model.addAttribute("places", placeService.categoryPlace(category.getName()));
         model.addAttribute("category", category.getName());
         return "categorylist";
     }
-    @GetMapping("/music/{placeId}")
+    @GetMapping("/{categoryName}/{placeId}")
     public String musicList(@PathVariable Long placeId, Model model) {
         model = setPlaceList(placeId, model);
         return "category";

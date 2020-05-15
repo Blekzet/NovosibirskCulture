@@ -19,9 +19,12 @@
     <div class="news-container" th:object="${affiche}">
         <h1 class="news-title" th:text="${affiche.afficheName}">Название афиши</h1>
         <div class="news-meta">
-            <a href="" class="comment-counter" th:text="${affiche.commentCount}">
-                <i class="fa fa-comments-o"></i>Количество комментариев
-            </a>
+            <div>
+                Дата проведения:<span class="news-date news-meta-child" th:text="${afficheDate}">Дата проведения</span>
+            </div>
+            <div>
+                Коментарии:<a href="" class="comment-counter news-meta-child" th:text="${affiche.commentCount}">Количество комментариев</a>
+            </div>
         </div>
         <div class="news-inner">
             <img class="news-img" th:src = "@{${affiche.picture}}">

@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.SimpleDateFormat;
+
 @Controller
 public class AfficheController {
     @Autowired
@@ -73,10 +75,14 @@ public class AfficheController {
 
     @GetMapping("/affiche/{afficheId}")
     public String affichePage(@PathVariable Long afficheId, Model model) {
+        Affiche affiche = afficheRepository.getOne(afficheId);
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+
         model.addAttribute("sidebarData", newsService.fourNewsList());
         model.addAttribute("comments", commentsRepository.findByAfficheId(afficheId));
         model.addAttribute("saveComment", new Comments());
-        model.addAttribute("affiche", afficheRepository.getOne(afficheId));
+        model.addAttribute("affiche", affiche);
+        model.addAttribute("afficheDate", formatter.format(affiche.getDate()));
         return "affiche";
     }
 
