@@ -11,8 +11,6 @@ public class Category {
     private Long categoryId;
     @Column(name = "name")
     private String name;
-    @Column(name = "description")
-    private String description;
     @Column(name = "eng_name")
     private String engName;
 
@@ -47,13 +45,6 @@ public class Category {
         return this;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public Set<News> getNewsCategory() {
         return newsCategory;
