@@ -48,7 +48,7 @@ public class PlaceController {
     @GetMapping("/editor/deletePlace/{placeId}")
     public String deletePerson(@PathVariable Long placeId, Model model) {
         placeService.deletePlace(placeRepository.getOne(placeId));
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("/editor/addplace")

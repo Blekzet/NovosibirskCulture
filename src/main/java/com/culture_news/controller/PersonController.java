@@ -52,10 +52,10 @@ public class PersonController {
         return "addperson";
     }
 
-    @GetMapping("/editor/deletePeson/{personId}")
+    @GetMapping("/editor/deletePerson/{personId}")
     public String deletePerson(@PathVariable Long personId, Model model) {
         personService.deletePerson(personsRepository.getOne(personId));
-        return "index";
+        return "redirect:/";
     }
     @GetMapping("/editor/changePerson/{personId}")
     public String changePerson(@PathVariable Long personId, Model model) {

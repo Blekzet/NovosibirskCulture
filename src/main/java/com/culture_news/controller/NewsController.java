@@ -76,7 +76,7 @@ public class NewsController {
     @GetMapping("/editor/deleteNews/{newsId}")
     public String deleteNews(@PathVariable Long newsId, Model model) {
         newsService.deleteNews(newsRepository.getOne(newsId));
-        return "index";
+        return "redirect:/";
     }
 
     @PostMapping("/editor/changeNews/{newsId}")
