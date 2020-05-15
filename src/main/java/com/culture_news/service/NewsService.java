@@ -80,4 +80,8 @@ public class NewsService{
     public List<News> fourNewsList() {
         return em.createQuery("SELECT n FROM News n order by n.date desc", News.class).setMaxResults(4).getResultList();
     }
+
+    public List<News> threeNewsList() {
+        return em.createQuery("SELECT n FROM News n ORDER BY n.commentsCount DESC , n.date DESC", News.class).setMaxResults(3).getResultList();
+    }
 }

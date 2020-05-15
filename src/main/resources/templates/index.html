@@ -31,15 +31,18 @@
 <div class="container">
     <div class="hot_news">
         <ul class="pgwSlider">
-            <li><img src="https://sun4-17.userapi.com/pABwofipwkAguLYlEXq9lmFEmYSw9xWgA09Sxw/KwYLvfFcYNY.jpg" alt="Заголовок новости 1" data-description="Краткий текст новости 1"></li>
-            <li><img src="https://sun4-17.userapi.com/pABwofipwkAguLYlEXq9lmFEmYSw9xWgA09Sxw/KwYLvfFcYNY.jpg" alt="Заголовок новости 2" data-description="Краткий текст новости 2"></li>
-            <li><img src="https://sun4-17.userapi.com/pABwofipwkAguLYlEXq9lmFEmYSw9xWgA09Sxw/KwYLvfFcYNY.jpg" alt="Заголовок новости 3" data-description="Краткий текст новости 3"></li>
+            <li th:each="top: ${topNews}">
+                <a th:href="@{'/news/' + ${top.newsId}}"    >
+                    <img th:src="@{${top.picture}}">
+                    <span th:text="${top.title}"> </span>
+                </a>
+            </li>
          </ul>
 
         <script>
             $(document).ready(function() {
                 $('.pgwSlider').pgwSlider(
-                    {maxHeight : 300, transitionEffect: 'sliding'}
+                    {maxHeight : 400, transitionEffect: 'sliding'}
                  );
             });
         </script>

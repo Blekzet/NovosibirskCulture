@@ -38,7 +38,7 @@ public class HomeController {
         if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
             page = Integer.parseInt(request.getParameter("page")) - 1;
         }
-
+        model.addAttribute("topNews", newsService.threeNewsList());
         model.addAttribute("newsList", newsRepository.findAll(PageRequest.of(page, size)));
         model.addAttribute("category", new Category());
         model.addAttribute("sidebarData", newsService.fourNewsList());
@@ -57,6 +57,7 @@ public class HomeController {
             return "redirect:/categoryNews/" + categoryRepository.findByName(category.getName()).getEngName() + "/";
         }
 
+        model.addAttribute("topNews", newsService.threeNewsList());
         model.addAttribute("sidebarData", newsService.fourNewsList());
         return "index";
     }
